@@ -2390,6 +2390,8 @@ const SecretMessageManager = {
         // sudah dihandle di displayMessage
     },
 
+
+
     getRandomMessage: () => {
         const randomIndex = Math.floor(Math.random() * SECRET_MESSAGES_LIST.length);
         return SECRET_MESSAGES_LIST[randomIndex];
@@ -2458,7 +2460,9 @@ const SecretMessageManager = {
             SecretMessageManager.container.classList.remove('visible');
             SecretMessageManager.container.classList.add('hidden');
         }
-    }
+    },
+
+    
 };
 // --- End Secret Messages ---
 
@@ -4044,8 +4048,11 @@ if (State.calcInputSequence123.join('') === '123') {
             }
             
             if (localStorage.getItem('gameMemoriDimenangkan') === 'true') {
-                GameMemori.lanjutkanKeCerita();
-                return;
+                const waktuMenangSaatIni = localStorage.getItem('waktuMenangGameMemori');
+    if (waktuMenangSaatIni && (Date.now() - parseInt(waktuMenangSaatIni)) < SATU_JAM_DALAM_MILIDETIK) {
+        GameMemori.lanjutkanKeCerita(); // Jika masih dalam 1 jam sejak menang, langsung ke cerita
+        return;
+    }
             }
             
             // Sembunyikan Intro Section saat game dimulai
@@ -4240,6 +4247,8 @@ localStorage.removeItem('jumlahKesalahanGameMemori');
                 GameMemori.lanjutkanKeCerita();
             }, 3000); 
         },
+
+
 
         kalahGameDanKunci: () => {
             gameMemoriAktif = false;
@@ -4637,11 +4646,49 @@ localStorage.removeItem('jumlahKesalahanGameMemori');
         setTimeout(tampilkanPesanSetelahKontenSiap, 500); // Penundaan awal
     }
 
+    console.log("Memulai init() halaman...");
+      
+        console.log("Initial localStorage gameMemoriDimenangkan:", localStorage.getItem('gameMemoriDimenangkan'));
+        console.log("Initial localStorage waktuMenangGameMemori:", waktuMenangDisimpan);
+        console.log("Initial gameTelahDimenangkanSebelumnya (var lokal):", gameTelahDimenangkanSebelumnya);
+
+
+        if (gameTelahDimenangkanSebelumnya && waktuMenangDisimpan) {
+            const waktuMenangMs = parseInt(waktuMenangDisimpan, 10);
+            const selisihWaktuMs = Date.now() - waktuMenangMs;
+            const satuJamMs = SATU_JAM_DALAM_MILIDETIK; // Pastikan SATU_JAM_DALAM_MILIDETIK terdefinisi global (3600000)
+
+            console.log("waktuMenangMs:", waktuMenangMs);
+            console.log("Date.now():", Date.now());
+            console.log("selisihWaktuMs:", selisihWaktuMs);
+            console.log("satuJamMs:", satuJamMs);
+            console.log("Apakah selisihWaktuMs > satuJamMs ?", selisihWaktuMs > satuJamMs);
+
+            if (selisihWaktuMs > satuJamMs) {
+                console.log("Game memori: Lebih dari 1 jam telah berlalu. Status kemenangan direset.");
+                localStorage.removeItem('gameMemoriDimenangkan');
+                localStorage.removeItem('waktuMenangGameMemori');
+                gameTelahDimenangkanSebelumnya = false; // Update status untuk digunakan dalam logika di bawah
+                console.log("localStorage gameMemoriDimenangkan SETELAH reset:", localStorage.getItem('gameMemoriDimenangkan'));
+            } else {
+                console.log("Game memori: Belum 1 jam sejak kemenangan terakhir.");
+            }
+        } else {
+            console.log("Tidak ada status 'gameTelahDimenangkanSebelumnya' atau 'waktuMenangDisimpan' di localStorage.");
+        }
+        // SELESAI KODE DEBUGGING YANG DIMASUKKAN untuk reset
+
+        // ... (LOGIKA PENGHITUNG JUMLAH KUNJUNGAN ANDA BIARKAN SEPERTI SEMULA) ...
+        // const KUNCI_JUMLAH_KUNJUNGAN = 'adzanSitusJumlahKunjungan';
+        // ... (dst, sampai sebelum "LOGIKA AWAL TAMPILAN")
+
+
         // LOGIKA AWAL TAMPILAN (setelah game dimenangkan atau pertama kali)
         const gameDimenangkan = localStorage.getItem('gameMemoriDimenangkan') === 'true';
         const sedangDalamLockout = localStorage.getItem('waktuAkhirKunciGameMemori') && Date.now() < parseInt(localStorage.getItem('waktuAkhirKunciGameMemori'));
 
         if (sedangDalamLockout) {
+            console.log("Masuk blok: sedangDalamLockout"); // LOG
             if (Cache.lapisanGameMemori) Cache.lapisanGameMemori.style.display = 'none'; // Sembunyikan game overlay standar
             if (typeof GameMemori !== 'undefined') GameMemori.tampilkanLayarKunci(parseInt(localStorage.getItem('waktuAkhirKunciGameMemori')));
             if (Cache.darkModeToggleButton) Cache.darkModeToggleButton.style.display = 'flex'; // Tombol mode tetap ada
@@ -4650,6 +4697,7 @@ localStorage.removeItem('jumlahKesalahanGameMemori');
              if (typeof UIManager !== 'undefined') UIManager.setWidgetVisibility(false); // Sembunyikan widget
 
         } else if (gameDimenangkan) {
+            console.log("Masuk blok: gameDimenangkan (skip ke cerita)"); // LOG
             // Jika game sudah dimenangkan, langsung ke cerita.
             // Ini akan ditangani oleh pemanggilan GameMemori.lanjutkanKeCerita() di dalam GameMemori.init()
             // atau bisa dipanggil langsung di sini jika intro memang sudah seharusnya tidak ada
@@ -4658,6 +4706,7 @@ localStorage.removeItem('jumlahKesalahanGameMemori');
             if (typeof GameMemori !== 'undefined' && GameMemori.lanjutkanKeCerita) {
                  GameMemori.lanjutkanKeCerita(true); // true untuk memaksa lanjut tanpa pengecekan game aktif
             } else {
+                console.log("Masuk blok: else (tampilkan intro/game)"); // LOG
                  // Fallback manual jika GameMemori belum sepenuhnya siap saat ini
                 if (Cache.darkModeToggleButton) Cache.darkModeToggleButton.style.display = 'flex';
                 if (typeof UIManager !== 'undefined') UIManager.setWidgetVisibility(true);
@@ -4721,6 +4770,8 @@ localStorage.removeItem('jumlahKesalahanGameMemori');
         
         setupEventListeners();
         console.log("Situs Aether diinisialisasi.");
+        
+    console.warn("PERINGATAN DEBUG: 'State' dan 'UIManager' diekspos sebagai 'window.debugState' dan 'window.debugUIManager'. Hapus setelah selesai!");
     };
 
     init(); 
