@@ -8,9 +8,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Cal+Sans:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Creepster&display=swap" rel="stylesheet">
   <style>
-/* === Efek Sedih (Mendung & Hujan) === */
-#sad-effect-overlay { /* Pastikan tidak ada .active di sini untuk style dasar */
-  display: none; /* Awalnya disembunyikan */
+
+#sad-effect-overlay { 
+  display: none; 
   position: fixed;
   top: 0;
   left: 0;
@@ -18,22 +18,22 @@
   height: 100vh;
   background-color: rgba(70, 80, 100, 0.5); /* Warna mendung dasar */
   backdrop-filter: grayscale(0.7) brightness(0.6);
-  z-index: 25000; /* Sesuaikan jika perlu, harus lebih rendah dari Game Memori & Morse/YT overlay */
+  z-index: 25000; 
   pointer-events: none;
   opacity: 0;
-  transition: opacity 2s ease-in-out; /* Transisi untuk fade-in/out */
-  overflow: hidden; /* Agar raindrop tidak membuat scrollbar jika keluar batas div */
+  transition: opacity 2s ease-in-out;
+  overflow: hidden; 
 }
 
 #sad-effect-overlay.active {
-  display: block !important; /* Paksa display block saat aktif */
-  opacity: 1 !important;     /* Paksa opacity 1 saat aktif */
+  display: block !important;
+  opacity: 1 !important;   
 }
 
 .raindrop {
   position: absolute;
   bottom: 100%;
-  width: 1px; /* Bisa dibuat 2px jika terlalu tipis */
+  width: 1px;
   height: 50px;
   background: linear-gradient(to bottom, rgba(174,194,224,0) 0%, rgba(174,194,224,0.6) 100%);
   animation: fall linear infinite;
@@ -1332,7 +1332,7 @@ body.dark-mode .story-marker-text {
 
   
 
-   <!-- DIV UNTUK POPUP KALENDER (AWALNYA DISEMBUNYIKAN) -->
+ 
    <div id="calendar-popup" class="widget" style="display: none; top: 60px; left: 10px; width: auto; min-width: 280px; z-index: 1002; flex-direction: column; align-items: center; padding: 15px;">
     <div id="calendar-header">
       <button id="calendar-prev-month"><</button>
@@ -1366,7 +1366,7 @@ body.dark-mode .story-marker-text {
     <h1>My Kisah</h1>
     <p id="intro-paragraph">
      <br>Halo, gue Adzan. Makasih banget buat lo yang udah mampir ke website ini. Kalau lo sempat ke sini sebelum tampilannya berubah, berarti lo termasuk orang yang beruntung.</br>
-      <br>Tujuan gue bikin situs ini sebenarnya cuma satu, yaitu buat curhat. Gak ada hal penting yang ngaruh ke hidup lo </br> <br>Jadi kalau lo ngerasa bosen baca drama gue, silakan aja keluar kapan pun lo mau. Semoga lo betah di sini dan enjoy browsing.</br> <br>Story updated on February 15th</br>
+      <br>Tujuan gue bikin situs ini sebenarnya cuma satu, yaitu buat sharing doang. Gak ada hal penting yang ngaruh ke hidup lo </br> <br>Jadi kalau lo ngerasa bosen baca drama disini, silakan aja keluar kapan pun lo mau. Semoga lo betah di sini dan enjoy browsing.</br> <br>Story updated on February 15th</br>
 
     </br>
     </p>
@@ -4511,6 +4511,41 @@ localStorage.removeItem('jumlahKesalahanGameMemori');
     const SATU_JAM_DALAM_MILIDETIK = 3600000;
 
     const init = () => {
+        const KUNCI_PENANDA_KUNJUNGAN_PERTAMA = 'pernahMainDiSitusAdzanV2';
+        let adalahKunjunganPertama = false;
+
+        try {
+            if (localStorage.getItem(KUNCI_PENANDA_KUNJUNGAN_PERTAMA) === null) {
+                adalahKunjunganPertama = true;
+            }
+        } catch (e) {
+            console.warn("Tidak dapat mengakses localStorage untuk cek kunjungan pertama:", e);
+            // Anggap saja bukan kunjungan pertama jika error, agar tidak mereset terus-menerus
+            adalahKunjunganPertama = false;
+        }
+
+        if (adalahKunjunganPertama) {
+            console.log("Kunjungan pertama terdeteksi. Mereset semua localStorage yang relevan.");
+            try {
+                // Hapus semua kunci localStorage yang digunakan website ini
+                localStorage.removeItem('darkMode');
+                localStorage.removeItem('gameMemoriDimenangkan');
+                localStorage.removeItem('waktuMenangGameMemori');
+                localStorage.removeItem('waktuAkhirKunciGameMemori');
+                localStorage.removeItem('jumlahKesalahanGameMemori');
+                localStorage.removeItem('adzanSitusJumlahKunjungan');
+                localStorage.removeItem('adzanSitusPesanKunjunganDitampilkan');
+                localStorage.removeItem('ceritaAdzanTerakhirDicapai');
+                // TAMBAHKAN kunci lain jika ada yang kamu pakai di localStorage
+
+                // Setelah bersih-bersih, tandai bahwa pengguna sudah pernah berkunjung
+                localStorage.setItem(KUNCI_PENANDA_KUNJUNGAN_PERTAMA, 'sudah');
+                console.log("Reset localStorage selesai, penanda kunjungan pertama telah dibuat.");
+            } catch (e) {
+                console.error("Gagal mereset localStorage pada kunjungan pertama:", e);
+            }
+        }
+    
         // Inisialisasi Cache elemen game di sini, karena elemen game ditambahkan di akhir body
         Cache.lapisanGameMemori = document.getElementById('game-memori-overlay');
         Cache.containerGameMemori = document.getElementById('game-memori-container');
@@ -4522,6 +4557,8 @@ localStorage.removeItem('jumlahKesalahanGameMemori');
         Cache.tampilanTimerKunciGameMemori = document.getElementById('timer-kunci-game-memori');
         Cache.areaPapanGameMemori = document.getElementById('area-papan-game-memori');
         Cache.pesanMenangGameMemori = document.getElementById('pesan-menang-game-memori');
+
+        
 
         const waktuMenangDisimpan = localStorage.getItem('waktuMenangGameMemori');
     let gameTelahDimenangkanSebelumnya = localStorage.getItem('gameMemoriDimenangkan') === 'true';
@@ -4792,14 +4829,14 @@ localStorage.removeItem('jumlahKesalahanGameMemori');
       <div id="area-papan-game-memori">
            <p id="kesalahan-game-memori" style="margin-bottom: 15px; font-size: 1.1rem; color: red; font-weight: bold;">Kesalahan: <span id="jumlah-kesalahan">0</span> / 4</p>
           <div id="grid-game-memori" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 20px;">
-              <!-- Kartu akan dibuat oleh JavaScript -->
+             
           </div>
       </div>
 
       <div id="pesan-menang-game-memori" style="display:none;">
           <h3 style="color: green; margin-bottom: 10px;">Anjir pinter lu ya, nih ekslusif cuman buat lu.</h3>
           <p>Lanjutkan kisah ini dalam 3 detik.</p>
-          <!-- Game akan otomatis tertutup setelah penundaan singkat -->
+       
       </div>
   </div>
 </div>
