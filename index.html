@@ -9,67 +9,19 @@
   <link href="https://fonts.googleapis.com/css?family=Creepster&display=swap" rel="stylesheet">
   <style>
 
-#sad-effect-overlay { 
-  display: none; 
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(70, 80, 100, 0.5); /* Warna mendung dasar */
-  backdrop-filter: grayscale(0.7) brightness(0.6);
-  z-index: 25000; 
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 2s ease-in-out;
-  overflow: hidden; 
-}
-
-#sad-effect-overlay.active {
-  display: block !important;
-  opacity: 1 !important;   
-}
-
-.raindrop {
-  position: absolute;
-  bottom: 100%;
-  width: 1px;
-  height: 50px;
-  background: linear-gradient(to bottom, rgba(174,194,224,0) 0%, rgba(174,194,224,0.6) 100%);
-  animation: fall linear infinite;
-  pointer-events: none;
-  /* z-index: 1; /* relatif terhadap #sad-effect-overlay */ /* Opsional, biasanya tidak perlu */
-}
-
-@keyframes fall {
-  0% {
-    transform: translateY(0px);
-    opacity: 1; /* Hujan terlihat saat mulai jatuh */
-  }
-  99.9% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(calc(100vh + 100px)); /* Pastikan jatuh melewati layar */
-    opacity: 0; /* Hujan menghilang saat mencapai dasar */
-  }
-}
-
 body.game-memori-aktif {
-    overflow: hidden !important; /* Mencegah scroll halaman di belakang lapisan game */
+    overflow: hidden !important; 
 }
 
-/* Penyesuaian agar lapisan game lebih dominan */
 #game-memori-overlay {
     z-index: 50000 !important; 
 }
 
 #game-memori-container {
     transition: background-color 0.5s ease, color 0.5s ease;
-    font-family: var(--font-primary) !important; /* Pastikan font utama dipakai */
+    font-family: var(--font-primary) !important; 
 }
 
-/* Penyesuaian tema terang */
 #game-memori-container {
     background-color: var(--bg-main-light);
     color: var(--text-color-light);
@@ -87,7 +39,7 @@ body.game-memori-aktif {
      color: var(--heading-color-light);
 }
 #kesalahan-game-memori {
-    color: red !important; /* Pastikan warna kesalahan selalu merah */
+    color: red !important; 
 }
 #layar-kunci-game-memori h3 {
     color: red !important;
@@ -96,7 +48,6 @@ body.game-memori-aktif {
     color: green !important;
 }
 
-/* Penyesuaian tema gelap */
 body.dark-mode #game-memori-container {
     background-color: var(--bg-main-dark, #1e1e1e) !important;
     color: var(--text-color-dark, #e0e0e0) !important;
@@ -201,7 +152,6 @@ body.dark-mode .kartu-memori.sudah-cocok {
 }
 
 
-/* Responsive adjustments untuk game grid */
 @media (max-width: 600px) {
     #game-memori-container {
         width: 95%;
@@ -236,13 +186,10 @@ body.dark-mode .kartu-memori.sudah-cocok {
     }
 }
 
-
-    /* Global Variables */
     :root {
       --font-primary: 'Cal Sans', sans-serif;
       --font-creepy: 'Creepster', cursive;
 
-      /* Light Theme */
       --bg-gradient-light: linear-gradient(to bottom, #87CEEB, #f0f8ff);
       --bg-main-light: rgba(255, 255, 255, 0.8);
       --text-color-light: #333;
@@ -258,9 +205,8 @@ body.dark-mode .kartu-memori.sudah-cocok {
       --calc-btn-hover-bg-light: rgba(255,255,255,0.5);
       --calc-clear-bg-light: rgba(255,0,0,0.7);
       --intro-text-color-light: #333;
-      --story-text-color-light: #333; /* Initial value, can be overridden by dark mode JS logic */
+      --story-text-color-light: #333; 
 
-      /* Player Base Variables - will be overridden by specific themes */
       --player-bg-color: #777;
       --player-glow-color: transparent;
       --player-text-color: white;
@@ -278,22 +224,18 @@ body.dark-mode .kartu-memori.sudah-cocok {
       --player-button-border-color: white;
       --player-button-hover-bg: rgba(255,255,255,.2);
       --player-playpause-button-bg: var(--player-seekbar-thumb-color);
-      --player-playpause-button-text-color: white; /* JS may adjust contrast */
-      --player-logo-spin-animation: spin-default; /* Default spin or none if overridden */
+      --player-playpause-button-text-color: white; 
+      --player-logo-spin-animation: spin-default; 
 
-      /* Dark Mode Toggle */
       --dm-toggle-bg-light: #FFF;
       --dm-toggle-border-light: #FFC107;
       --dm-toggle-icon-bg-light: #FFC107;
       --dm-toggle-icon-shadow-light: 0 0 10px rgba(255, 193, 7, 0.7);
 
-      /* Specific Dark Mode Toggle Styles in Dark Mode Block */
     }
 
-    /* Default Spin Animation (can be overridden) */
     @keyframes spin-default { 0%{transform:rotate(0deg)} 100%{transform:rotate(360deg)} }
 
-    /* --- NEW ANIMATIONS --- */
     @keyframes fadeInBody {
       from { opacity: 0; }
       to { opacity: 1; }
@@ -329,12 +271,11 @@ body.dark-mode .kartu-memori.sudah-cocok {
         50% { transform: scale(0.92); box-shadow: 0 0 3px var(--widget-text-light), inset 0 0 5px rgba(0,0,0,0.2); }
         100% { transform: scale(1); }
     }
-    /* ANIMASI BARU UNTUK DATE TIME WIDGET */
     @keyframes dateTimeWidgetClickAnimation {
         0% {
             transform: scale(1) rotate(0deg);
             filter: brightness(100%) saturate(100%) hue-rotate(0deg);
-            box-shadow: var(--widget-shadow-light); /* Akan menggunakan var dark jika dark mode aktif */
+            box-shadow: var(--widget-shadow-light); 
         }
         20% {
             transform: scale(1.15) rotate(5deg);
@@ -359,16 +300,13 @@ body.dark-mode .kartu-memori.sudah-cocok {
         100% {
             transform: scale(1) rotate(0deg);
             filter: brightness(100%) saturate(100%) hue-rotate(0deg);
-            box-shadow: var(--widget-shadow-light); /* Kembali ke shadow normal */
+            box-shadow: var(--widget-shadow-light); 
         }
     }
     .date-time-animate {
         animation: dateTimeWidgetClickAnimation 0.9s cubic-bezier(0.25, 0.1, 0.25, 1);
     }
-    /* --- END NEW ANIMATIONS --- */
 
-
-    /* Global Styles */
     * { 
       margin: 0; 
       padding: 0; 
@@ -379,31 +317,25 @@ body.dark-mode .kartu-memori.sudah-cocok {
     }
     body { 
       font-family: var(--font-primary); 
-      background: var(--bg-gradient-light); /* Fallback, actual background controlled by #fire-background */
+      background: var(--bg-gradient-light); 
       color: var(--text-color-light);
       transition: background-color 0.5s ease, background-image 0.5s ease, color 0.5s ease;
       min-height: 100vh;
       overflow-x: hidden; 
       position: relative;
-      animation: fadeInBody 1.2s ease-in-out forwards; /* NEW Animation */
+      animation: fadeInBody 1.2s ease-in-out forwards; 
     }
 
-    /* CSS UNTUK MEMBLOKIR INTERAKSI SAAT VIDEO YOUTUBE MUNCUL */
     body.youtube-video-active {
-        overflow: hidden !important; /* Mencegah scroll halaman di belakang overlay */
+        overflow: hidden !important; 
     }
     body.youtube-video-active > *:not(#youtube-video-overlay) {
-        pointer-events: none !important; /* Menonaktifkan klik pada semua elemen kecuali overlay video */
-        /* filter: blur(3px); /* Optional: tambahkan blur untuk efek visual */
-        /* opacity: 0.7; /* Optional: kurangi opacity elemen di belakang */
+        pointer-events: none !important; 
     }
     #youtube-video-overlay {
-        /* Pastikan overlay video bisa diinteraksi jika ada kontrol custom (meskipun di sini tidak ada) */
         pointer-events: auto;
     }
 
-
-    /* Layout & Core Content Sections */
     #intro { 
       display: flex; 
       flex-direction: column; 
@@ -449,12 +381,11 @@ body.dark-mode .kartu-memori.sudah-cocok {
       to { opacity: 1; transform: translateY(0); } 
     }
 
-    /* Typography within Intro & Main */
     #intro h1 {
-      animation: textFocusIn 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) 0.5s both; /* NEW Animation */
+      animation: textFocusIn 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) 0.5s both; 
     }
     main.is-entering #story h2 {
-        animation: textFocusIn 0.8s cubic-bezier(0.550, 0.085, 0.680, 0.530) 0.7s both; /* NEW Animation, delayed */
+        animation: textFocusIn 0.8s cubic-bezier(0.550, 0.085, 0.680, 0.530) 0.7s both; 
     }
     #intro h1, #story h2 { 
       font-size: 2.5rem; 
@@ -508,8 +439,8 @@ body.dark-mode .kartu-memori.sudah-cocok {
     }
     #intro button:hover, #next-button:hover:not(:disabled) { 
       background: var(--button-hover-bg-light); 
-      transform: scale(1.05) translateY(-2px); /* Enhanced hover */
-      box-shadow: 0 6px 12px rgba(0,0,0,0.2); /* Enhanced hover shadow */
+      transform: scale(1.05) translateY(-2px); 
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2); 
     }
     #next-button:disabled {
         background-color: #cccccc !important; 
@@ -553,7 +484,6 @@ body.dark-mode .kartu-memori.sudah-cocok {
       pointer-events: none; 
     }
 
-    /* Widgets (Date/Time, Calculator) */
     .widget {
       position: fixed; 
       font-family: var(--font-primary); 
@@ -565,21 +495,20 @@ body.dark-mode .kartu-memori.sudah-cocok {
       user-select: none; 
       text-align: center;
       backdrop-filter: blur(5px); 
-      transition: background-color 0.3s ease, box-shadow 0.3s ease, opacity 0.5s ease-out, transform 0.5s ease-out; /* Added opacity/transform transition */
-      opacity: 0; /* For animation */
-      transform: translateY(-20px); /* For animation */
+      transition: background-color 0.3s ease, box-shadow 0.3s ease, opacity 0.5s ease-out, transform 0.5s ease-out; 
+      opacity: 0; 
+      transform: translateY(-20px); 
       pointer-events: auto; 
     }
     .widget * { 
         pointer-events: auto; 
         user-select: auto; 
     }
-    /* NEW class for widget animation */
     .widget.widget-active {
         opacity: 1;
         transform: translateY(0);
-        animation: fadeInWidget 0.6s ease-out forwards; /* Can also be used if transition preferred, just remove animation */
-        animation-delay: 0.5s; /* Stagger slightly after main content slides in */
+        animation: fadeInWidget 0.6s ease-out forwards; 
+        animation-delay: 0.5s; 
     }
 
     #date-time-logo { 
@@ -619,20 +548,29 @@ body.dark-mode .kartu-memori.sudah-cocok {
       transform: translateY(-1px);
     }
     #calc-buttons button:active {
-      transform: translateY(1px) scale(0.95); /* Added scale for more feedback */
+      transform: translateY(1px) scale(0.95); 
     }
-    #calc-buttons button.pressed-animation { /* NEW Animation class */
+    #calc-buttons button.pressed-animation { 
         animation: calcButtonPressed 0.2s ease-out;
     }
     #calc-buttons #clear { 
       grid-column: span 4; background: var(--calc-clear-bg-light); 
     }
 
-    /* Scary Overlay & Fire Background */
     #scary-text-overlay, #fire-background { 
       user-select: none; 
       pointer-events: none; 
     }
+
+    body.sad-effect-active #fire-background {
+  filter: grayscale(0.8) brightness(0.4);
+
+  animation: none !important; 
+  
+  background-image: none !important;
+  background-color: #2a2e37; 
+}
+
     #scary-text-overlay { 
       position: fixed; top: 50%; left: 50%; 
       transform: translate(-50%, -50%); 
@@ -651,10 +589,9 @@ body.dark-mode .kartu-memori.sudah-cocok {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
       overflow: hidden; z-index: -2; 
       background: var(--bg-gradient-light);
-      /* NEW ANIMATION for background gradient */
+      transition: background-image 0.5s ease, background-color 0.5s ease, filter 2s ease-in-out;
       background-size: 100% 300%;
       animation: animatedMainBackgroundGradient 20s ease infinite alternate;
-      transition: background-image 0.5s ease, background-color 0.5s ease; /* Retain dark mode transition */
     }
     .fire-number { 
       position: absolute; font-size: 2rem; font-family: var(--font-primary); 
@@ -670,7 +607,6 @@ body.dark-mode .kartu-memori.sudah-cocok {
       50% { opacity: 1; } 
     }
 
-    /* Base Music Player Styles */
     .music-player-container {
       display: none; 
       align-items: center;
@@ -686,12 +622,11 @@ body.dark-mode .kartu-memori.sudah-cocok {
       transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease, opacity 0.5s ease-out, transform 0.5s ease-out;
       pointer-events: auto; 
       user-select: none; 
-      opacity: 0; /* For animation, set to 1 by animation */
+      opacity: 0; 
     }
-    /* NEW class for player animation */
     .music-player-container.player-active-animation {
         animation: popInPlayer 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
-         opacity: 1; /* Ensure it's visible after animation */
+         opacity: 1; 
     }
 
     .player-logo-wrapper { 
@@ -713,7 +648,6 @@ body.dark-mode .kartu-memori.sudah-cocok {
       animation-timing-function: linear; 
       animation-iteration-count: infinite; 
     }
-    /* Specific Spin Animations, referenced by --player-logo-spin-animation */
     @keyframes spin-fuchsia  { 0%{transform:rotate(0deg)} 100%{transform:rotate(360deg)} }
     @keyframes spin-emerald  { 0%{transform:rotate(0deg)} 100%{transform:rotate(360deg)} }
     @keyframes spin-burgundy { 0%{transform:rotate(0deg)} 100%{transform:rotate(360deg)} }
@@ -807,23 +741,21 @@ body.dark-mode .kartu-memori.sudah-cocok {
       opacity: .5; cursor: not-allowed; box-shadow: none; transform: none;
     }
 
-    /* YouTube Video Overlay */
     #youtube-video-overlay { 
       position:fixed; top:0; left:0; width:100vw; height:100vh; 
       background-color:black; z-index:30000; 
       display:none; justify-content:center; align-items:center; overflow:hidden;
-      pointer-events:auto; /* Diatur oleh JS, tapi defaultnya auto untuk overlay */
+      pointer-events:auto; 
     }
     #youtube-player-container { 
       width:100%; height:100%; position:relative; 
-      pointer-events:none; /* Biarkan iframe di dalamnya yang menangkap event */
+      pointer-events:none; 
     } 
     #youtube-player-container iframe { 
       position:absolute; top:0; left:0; width:100%; height:100%; border:0; 
-      pointer-events:auto; /* Penting agar iframe bisa dikontrol jika perlu (meski kontrol dimatikan) */
+      pointer-events:auto; 
     }
 
-    /* Morse Code Overlay */
     #morse-code-overlay { 
       position:fixed; top:0; left:0; width:100%; height:100%; 
       background-color:rgba(0,0,0,.9); color:red; 
@@ -836,7 +768,6 @@ body.dark-mode .kartu-memori.sudah-cocok {
     }
     @keyframes fadeInMorse { to { opacity:1 } }
 
-    /* === Dark Mode === */
     body.dark-mode {
       --bg-gradient-dark: none; 
       --bg-color-dark: #121212;
@@ -872,10 +803,10 @@ body.dark-mode .kartu-memori.sudah-cocok {
       color: var(--text-color-dark); 
     }
     body.dark-mode #fire-background { 
-      background-image: radial-gradient(ellipse at center, rgba(50, 50, 70, 0.2) 0%, transparent 70%); /* MODIFIED for subtle dark effect */
+      background-image: radial-gradient(ellipse at center, rgba(50, 50, 70, 0.2) 0%, transparent 70%); 
       background-color: var(--bg-color-dark);
       background-size: 150% 150%;
-      animation: animatedDarkMainBackground 25s linear infinite alternate; /* MODIFIED Dark background animation */
+      animation: animatedDarkMainBackground 25s linear infinite alternate; 
     }
     body.dark-mode #intro, body.dark-mode main { 
       background: var(--bg-main-dark); 
@@ -891,13 +822,11 @@ body.dark-mode .kartu-memori.sudah-cocok {
      body.dark-mode #intro p { 
       color: var(--intro-text-color-dark);
     }
-    /* Gunakan var --widget-shadow-dark untuk animasi date-time di dark mode */
     body.dark-mode .date-time-animate {
-        animation-name: dateTimeWidgetClickAnimation; /* Pastikan animasi yang sama digunakan */
-         box-shadow: var(--widget-shadow-dark); /* Default shadow untuk dark mode */
+        animation-name: dateTimeWidgetClickAnimation; 
+         box-shadow: var(--widget-shadow-dark); 
     }
     body.dark-mode .date-time-animate {
-    /* Menggunakan animasi yang dikhususkan untuk dark mode */
     animation: dateTimeWidgetClickAnimationDark 0.9s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
@@ -910,22 +839,22 @@ body.dark-mode .kartu-memori.sudah-cocok {
     20% {
         transform: scale(1.15) rotate(5deg);
         filter: brightness(115%) saturate(160%) hue-rotate(45deg);
-        box-shadow: 0 0 15px rgba(200, 160, 50, 0.7), 0 0 25px rgba(220, 220, 200, 0.6); /* Muted gold / soft light */
+        box-shadow: 0 0 15px rgba(200, 160, 50, 0.7), 0 0 25px rgba(220, 220, 200, 0.6); 
     }
     40% {
         transform: scale(0.9) rotate(-5deg);
         filter: brightness(95%) saturate(130%) hue-rotate(-45deg);
-        box-shadow: 0 0 15px rgba(70, 130, 180, 0.7), 0 0 25px rgba(100, 170, 220, 0.6); /* Steel blue / soft cyan-blue */
+        box-shadow: 0 0 15px rgba(70, 130, 180, 0.7), 0 0 25px rgba(100, 170, 220, 0.6); 
     }
     60% {
         transform: scale(1.1) rotate(3deg) translateX(5px);
         filter: brightness(110%) saturate(150%) hue-rotate(90deg);
-        box-shadow: 0 0 20px rgba(100, 180, 100, 0.7), 0 0 30px rgba(150, 210, 150, 0.6); /* Muted green / light desaturated green */
+        box-shadow: 0 0 20px rgba(100, 180, 100, 0.7), 0 0 30px rgba(150, 210, 150, 0.6); 
     }
     80% {
         transform: scale(0.95) rotate(-2deg) translateX(-5px);
         filter: brightness(100%) saturate(120%) hue-rotate(-90deg);
-        box-shadow: 0 0 15px rgba(170, 110, 170, 0.7), 0 0 25px rgba(200, 170, 200, 0.6); /* Muted orchid / soft lavender */
+        box-shadow: 0 0 15px rgba(170, 110, 170, 0.7), 0 0 25px rgba(200, 170, 200, 0.6); 
     }
     100% {
         transform: scale(1) rotate(0deg);
@@ -936,7 +865,6 @@ body.dark-mode .kartu-memori.sudah-cocok {
 
     body.dark-mode #intro button:hover, body.dark-mode #next-button:hover:not(:disabled) { 
       background: var(--button-hover-bg-dark); 
-      /* Enhanced hover already applied globally */
     }
     body.dark-mode .widget { 
       background: var(--widget-bg-dark); 
@@ -1010,7 +938,6 @@ body.dark-mode .kartu-memori.sudah-cocok {
     .player-controls-ivory button { background:#e8e8e0; border:1px solid #dcdcdc; color:#404040; box-shadow:0 2px 5px rgba(0,0,0,.1); width:42px; height:42px;}
     .player-controls-ivory button#play-pause-button-ivory.play-pause-btn { background-color:#808078; color:white; }
 
-    /* Responsive Design */
     @media (max-width:768px){
       body { padding:10px; display:flex; flex-direction:column; align-items:center; }
       main, #intro { order:3; width:100%; margin-top:10px; }
@@ -1018,7 +945,7 @@ body.dark-mode .kartu-memori.sudah-cocok {
       #date-time-logo.widget { position:static; order:-2; margin:0 auto 15px auto; width:90%; max-width:250px; }
       #calculator.widget { position:static; order:-1; margin:0 auto 15px auto; width:90%; max-width:250px; }
       
-      .widget.widget-active { animation-delay: 0.2s; /* Adjust delay for mobile if needed */ }
+      .widget.widget-active { animation-delay: 0.2s;  }
 
 
       #intro h1 { font-size:2rem; }
@@ -1042,27 +969,26 @@ body.dark-mode .kartu-memori.sudah-cocok {
         #intro p, #story-text-content { font-size: 0.9rem; }
     }
 
-    /* === Secret Message Styling === */
 #secret-message-container {
   position: fixed;
-  bottom: 20px; /* Jarak dari bawah layar */
+  bottom: 20px; 
   left: 50%;
-  transform: translateX(-50%); /* Untuk memusatkan secara horizontal */
+  transform: translateX(-50%); 
   padding: 8px 15px;
   border-radius: 6px;
-  font-family: var(--font-primary); /* Menggunakan font utama seperti cerita */
-  font-size: 0.95rem; /* Sedikit lebih kecil agar tidak terlalu dominan */
-  color: var(--story-text-color-light); /* Warna default, akan disesuaikan JavaScript untuk dark mode */
-  background-color: rgba(0, 0, 0, 0.05); /* Background sangat tipis dan transparan */
-  backdrop-filter: blur(2px); /* Efek blur untuk background */
+  font-family: var(--font-primary); 
+  font-size: 0.95rem; 
+  color: var(--story-text-color-light); 
+  background-color: rgba(0, 0, 0, 0.05); 
+  backdrop-filter: blur(2px); 
   box-shadow: 0 1px 5px rgba(0,0,0,0.15);
-  z-index: 9000; /* Pastikan muncul di atas banyak elemen lain */
+  z-index: 9000; 
   opacity: 0;
-  transition: opacity 0.3s ease-in-out; /* Transisi untuk container */
-  pointer-events: none; /* Agar tidak bisa diklik atau mengganggu elemen di bawahnya */
+  transition: opacity 0.3s ease-in-out; 
+  pointer-events: none; 
   text-align: center;
-  max-width: 85%; /* Maksimum lebar container */
-  visibility: hidden; /* Awalnya disembunyikan */
+  max-width: 85%; 
+  visibility: hidden; 
 }
 
 #secret-message-container.visible {
@@ -1075,17 +1001,16 @@ body.dark-mode .kartu-memori.sudah-cocok {
   visibility: hidden;
 }
 
-/* Animasi untuk setiap item pesan */
 @keyframes secretMessageFadeInOut {
-  0% { opacity: 0; transform: translateY(15px) scale(0.9); } /* Mulai dari bawah, sedikit kecil, transparan */
-  15% { opacity: 1; transform: translateY(0) scale(1); }   /* Muncul penuh */
-  85% { opacity: 1; transform: translateY(0) scale(1); }   /* Tetap terlihat */
-  100% { opacity: 0; transform: translateY(-10px) scale(0.95); }/* Hilang ke atas, transparan */
+  0% { opacity: 0; transform: translateY(15px) scale(0.9); } 
+  15% { opacity: 1; transform: translateY(0) scale(1); }   
+  85% { opacity: 1; transform: translateY(0) scale(1); }   
+  100% { opacity: 0; transform: translateY(-10px) scale(0.95); }
 }
 
 .secret-message-item {
-  display: inline-block; /* Agar animasi transform bekerja baik */
-  animation: secretMessageFadeInOut 4s cubic-bezier(0.25, 0.1, 0.25, 1) forwards; /* Durasi 2 detik */
+  display: inline-block; 
+  animation: secretMessageFadeInOut 4s cubic-bezier(0.25, 0.1, 0.25, 1) forwards; 
 }
 
 body.dark-mode #secret-message-container {
@@ -1093,25 +1018,23 @@ body.dark-mode #secret-message-container {
   background-color: rgba(255, 255, 255, 0.05);
   box-shadow: 0 1px 5px rgba(255,255,255,0.1);
 }
-/* === End Secret Message Styling === */
 #local-video-overlay {
-  pointer-events: auto; /* Memastikan overlay bisa menerima klik */
+  pointer-events: auto; 
 }
 
 body.local-video-active {
     overflow: hidden !important;
 }
-body.local-video-active > *:not(#local-video-overlay):not(#local-video-player) { /* Disesuaikan agar tidak menarget video playernya sendiri jika klik terjadi di dalam */
+body.local-video-active > *:not(#local-video-overlay):not(#local-video-player) { 
     pointer-events: none !important;
 }
 
 #calendar-toggle-button {
   position: fixed;
   top: 10px;
-  /* Atur left berdasarkan lebar tombol dark mode + sedikit spasi */
-  left: 65px; /* (Misal: 48px lebar dark mode + 2px border + 15px spasi) */
+  left: 65px; 
   z-index: 1001;
-  background-color: var(--dm-toggle-bg-light); /* Serupa dengan dark mode toggle */
+  background-color: var(--dm-toggle-bg-light); 
   border: 2px solid var(--dm-toggle-border-light);
   border-radius: 50%;
   width: 48px;
@@ -1121,29 +1044,25 @@ body.local-video-active > *:not(#local-video-overlay):not(#local-video-player) {
   justify-content: center;
   align-items: center;
   transition: background-color 0.5s ease, border-color 0.5s ease, transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15), 0 0 0px var(--heading-color-light); /* Untuk efek glow */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15), 0 0 0px var(--heading-color-light); 
   overflow: hidden;
   cursor: pointer;
 }
 
 #calendar-toggle-button:hover {
   transform: scale(1.1) rotate(-15deg);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2), 0 0 15px var(--heading-color-light); /* Glow lebih kuat saat hover */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2), 0 0 15px var(--heading-color-light); 
 }
 
 #calendar-toggle-button .calendar-icon {
-  font-size: 24px; /* Sesuaikan jika menggunakan emoji atau font icon */
-  /* Styling untuk ikon SVG atau <img> bisa ditambahkan di sini */
-  color: var(--dm-toggle-icon-bg-light); /* Atau warna ikon Anda */
+  font-size: 24px; 
+  color: var(--dm-toggle-icon-bg-light); 
   pointer-events: none;
-  filter: drop-shadow(0 0 5px var(--dm-toggle-icon-bg-light)); /* Efek glow untuk ikon */
+  filter: drop-shadow(0 0 5px var(--dm-toggle-icon-bg-light)); 
 }
 
-/* Styling untuk popup kalender */
 #calendar-popup {
-  /* top, left, width, dll. sudah diatur inline, bisa disesuaikan lagi */
-  /* Gunakan variabel CSS widget yang sudah ada */
-  opacity: 0; /* Untuk animasi */
+  opacity: 0; 
   transform: translateY(-10px) scale(0.95);
   transition: opacity 0.3s ease-out, transform 0.3s ease-out;
 }
@@ -1218,7 +1137,6 @@ body.local-video-active > *:not(#local-video-overlay):not(#local-video-player) {
 }
 
 
-/* Penyesuaian untuk Dark Mode (jika diperlukan, banyak yang sudah ter-handle variabel) */
 body.dark-mode #calendar-toggle-button {
   background-color: var(--dm-toggle-bg-dark);
   border-color: var(--dm-toggle-border-dark);
@@ -1255,50 +1173,42 @@ body.dark-mode #calendar-days div.selected {
 body.dark-mode #calendar-days div.weekday-header {
   border-bottom: 1px solid rgba(255,255,255,0.1);
 }
-/* Penyesuaian untuk Mobile */
 @media (max-width: 768px) {
-  /* Remove individual mobile positioning for dark-mode-toggle */
   #top-controls-wrapper {
-    order: -3; /* Posisikan grup tombol ini paling atas */
+    order: -3; 
     display: flex;
-    justify-content: center; /* Pusatkan tombol-tombol di dalam wrapper */
+    justify-content: center; 
     align-items: center;
-    gap: 15px; /* Jarak antar tombol */
-    width: auto; /* Lebar wrapper mengikuti kontennya */
-    margin-bottom: 15px; /* Jarak bawah dari grup tombol ke elemen berikutnya */
+    gap: 15px; 
+    width: auto; 
+    margin-bottom: 15px; 
   }
 
-  /* Pastikan tombol di dalam wrapper tidak lagi punya margin auto individual */
   #dark-mode-toggle, #calendar-toggle-button {
-    position: relative; /* Atau biarkan static jika tidak perlu layering khusus */
-    order: unset; /* Hapus order individual jika sudah di dalam wrapper */
-    margin: 0; /* Hapus margin auto individual */
+    position: relative; 
+    order: unset; 
+    margin: 0; 
   }
-  /* AKHIR STYLING BARU UNTUK WRAPPER */
   
-  /* Ensure other widgets are correctly ordered below */
   #date-time-logo.widget { position:static; order:-2; margin:0 auto 15px auto; width:90%; max-width:250px; }
   #calculator.widget { position:static; order:-1; margin:0 auto 15px auto; width:90%; max-width:250px; }
-  .widget.widget-active { animation-delay: 0.2s; /* Adjust delay for mobile if needed */ }
+  .widget.widget-active { animation-delay: 0.2s;  }
 
   
   .story-marker-highlight {
-    /* Style untuk menyorot teks/paragraf, bisa disesuaikan */
-    display: inline-block; /* Agar padding dan background bisa diterapkan jika span kosong */
-    background-color: rgba(255, 230, 150, 0.5); /* Kuning lembut transparan */
+    display: inline-block; 
+    background-color: rgba(255, 230, 150, 0.5); 
     padding: 0 4px;
     border-radius: 3px;
-    /* box-shadow: 0 0 8px rgba(255, 215, 0, 0.6); */
     transition: background-color 0.3s ease;
 }
 body.dark-mode .story-marker-highlight {
-    background-color: rgba(100, 90, 50, 0.6); /* Warna yang kontras di dark mode */
-    /* box-shadow: 0 0 8px rgba(255, 215, 0, 0.4); */
+    background-color: rgba(100, 90, 50, 0.6); 
 }
 .story-marker-text {
     font-size: 0.8em;
     font-style: italic;
-    color: #666; /* Sesuaikan warnanya */
+    color: #666; 
     margin-left: 8px;
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
@@ -1312,10 +1222,6 @@ body.dark-mode .story-marker-text {
  
 
 }
-
-
-
-
 
   </style>
 </head>
@@ -1344,7 +1250,6 @@ body.dark-mode .story-marker-text {
   </div>
 
   <div id="date-time-logo" class="widget" title="Date and Time">
-    <!-- Content populated by JS -->
     <div id="countdown">Initializing countdown...</div>
   </div>
 
@@ -1440,7 +1345,7 @@ Orang-orang yang liat langsung nuding Putra. Wajahnya, namanya, semua dipake. Ta
 
 Gue bareng beberapa temen langsung gerak. Kita bongkar akun itu, cek following, follower, aktivitasnya. Ada juga beberapa temen cewek yang ngaku pernah dapet DM dari akun yang sama. Isinya vulgar, jorok, dan bikin muntah kalo dibaca.
 
-Pastinya semua temen gue langsung marah. Tapi di balik itu, gua penasaran sama pikiran gua... Gimana perasaan dia, ya? Yang difoto, yang dijadiin bahan hinaan, yang namanya dikotori orang gak dikenal. Gimana rasanya liat wajah lo sendiri dijadiin alat buat muasin nafsu orang lain?
+Pastinya semua temen gue langsung marah. Tapi di balik itu, gua penasaran sama pikiran gua... Gimana perasaan dia, ya? Yang difoto, yang dijadiin bahan hinaan, yang namanya dikotori orang gak dikenal. Gimana rasanya liat wajah lo sendiri dijadiin alat buat muasin nafsu orang lain? Lo nggak bakal ngerti. Lo mungkin sekarang lagi asik ngebayangin gimana rupa wajah 'Dia'. Mungkin lo bahkan udah siap-siap buka tab baru, nyoba nyari namanya di Google pake kata kunci dari cerita ini. Udah lah, ngaku aja. Rasa penasaran lo itu penyakit, sama kayak penyakit orang-orang yang bikin dia ancur. Tapi yang bisa gue lakuin waktu itu cuma... marah diem-diem.
 
 Belom juga kelar urusan akun si Putra itu, gue sama bocah-bocah masih ngejar siapa biang keroknya. Tiap hari ada aja bahan gosip siapa yang sebusuk itu. Tapi ya elah, namanya juga bocil SD, detektif-detektifan kita mah cupu. Hampir nyerah mikir tu setan udah diem atau paling jiper sendiri.
 
@@ -2214,7 +2119,6 @@ Buat Dia, itu peluru terakhir yang nembus jantungnya.
 
       
       
-      <!-- Music Players -->
       <div id="music-player-container-fuchsia" class="music-player-container">
         <div id="player-logo-wrapper-fuchsia" class="player-logo-wrapper">
           <div id="player-logo-background-fuchsia" class="player-logo-background"></div>
@@ -2340,25 +2244,19 @@ Buat Dia, itu peluru terakhir yang nembus jantungnya.
   
   <div id="youtube-video-overlay" aria-hidden="true">
     <div id="youtube-player-container">
-      <!-- YouTube IFrame will be injected here by JS -->
     </div>
   </div>
 
-  <!-- Tambahkan ini di dalam <body> -->
-<div id="local-video-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(0,0,0,0.9); z-index: 35000; /* Di atas youtube overlay */ justify-content: center; align-items: center;">
+<div id="local-video-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(0,0,0,0.9); z-index: 35000;  justify-content: center; align-items: center;">
   <video id="local-video-player" width="80%" height="80%" controls style="max-width: 100%; max-height: 100%;"></video>
 </div>
-<!-- Tambahkan ini sebelum tag penutup </body> atau sebelum tag script utama -->
 <audio id="direct-audio-player" style="display:none;"></audio>
-<<div id="sad-effect-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(70, 80, 100, 0.5); backdrop-filter: grayscale(0.7) brightness(0.6); z-index: 25000; pointer-events: none; opacity: 0; transition: opacity 2s ease-in-out; overflow: hidden;">
-    <!-- Kontainer untuk partikel hujan akan ditambahkan oleh JS di sini jika diperlukan -->
-  </div>
+
   <script src="https://www.youtube.com/iframe_api"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.4.2/chroma.min.js"></script>
   
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // --- DOM Element Cache ---
         const Cache = {
         body: document.body,
         introSection: document.getElementById('intro'),
@@ -2387,11 +2285,9 @@ Buat Dia, itu peluru terakhir yang nembus jantungnya.
         calendarMonthYearText: document.getElementById('calendar-month-year'),
         calendarDaysContainer: document.getElementById('calendar-days'),
         calendarMessageDisplay: document.getElementById('calendar-message-display'),
-        sadEffectOverlay: document.getElementById('sad-effect-overlay'),
     triggerMeninggalText: document.getElementById('trigger_teks_meninggal'),
-    triggerPenutupanSection: document.getElementById('story_point_penutupan'), // Menggunakan ID yang sudah ada
+    triggerPenutupanSection: document.getElementById('story_point_penutupan'), 
         
-        // Cache untuk Game Memori (Harus diinisialisasi SETELAH DOM siap, seperti yang lain)
         lapisanGameMemori: null, 
         containerGameMemori: null,
         judulGameMemori: null,
@@ -2406,7 +2302,6 @@ Buat Dia, itu peluru terakhir yang nembus jantungnya.
     };
 
      
-        // --- State Variables ---
         let State = {
         youtubePlayer: null,
         originalStoryTextHTML: Cache.storyTextParagraph ? Cache.storyTextParagraph.innerHTML : '',
@@ -2429,9 +2324,9 @@ Buat Dia, itu peluru terakhir yang nembus jantungnya.
         isScaryEffectActive: false,
         calcInputSequence328: [],
         is328TriggerEnabled: true,
-        calcInputSequence402: [],         // << BARU: Untuk melacak urutan "402"
-            is402TriggerEnabled: true,        // << BARU: Untuk mengontrol pemicu "402"
-            currentLocalVideoSrc: null,       // << BARU/MODIFIKASI: Untuk mengetahui video mana yang sedang aktif
+        calcInputSequence402: [],         
+            is402TriggerEnabled: true,        
+            currentLocalVideoSrc: null,       
         calcInputSequence8427: [],
         currentCalendarDate: new Date(),
         isCalendarVisible: false,
@@ -2445,18 +2340,16 @@ Buat Dia, itu peluru terakhir yang nembus jantungnya.
         calcInputSequence2010: [],
         isSadEffectActive: false,
         rainIntervalId: null,
-        sadEffectObserverInstance: null, // TAMBAHKAN INI
+        sadEffectObserverInstance: null, 
     };
         
-        // --- Constants & Configuration ---
         const MORSE_MESSAGE_FOR_STORY = "LSAuIC0uLiAtLiAtLS0gLi0tLiAuLi4gLiAuLS4gLyAtLSAuLSAuLi0gLS0uLSAtLSAuLi0gLS4gLyAtLi4gLS0tIC4uLSAtLS4tIC8gLS0gLi4tIC4tLi4gLiAuLSAtLi0uIC8gLi4uIC4gLSAtLiAuLSAtIC0uLS4gLiAuLS0uIC4uLiAvIC0tLi4tLSAtLS0gLS4uIC0uIC4tIC0tIC4uIC4tLiAtLi0uIC4tIC4tLi4gLyAuLiAuLi4gLi4uIC4gLi4tLiAvIC4uLiAuLiAtLSAuLiAtLiAvIC4uIC4tLi4gLi4tIC0uLS4gLS0tIC8gLSAtLiAuLi0gLi4uIC8gLS0uLi0tIC0tLSAtLi4gLS4gLi0gLi4tIC0tLi0gLi4gLi0uLiAuLSAvIC4tLi0uLSAuIC4tIC4tLi4gLi0uLiAuIC0gLi4uIC8gLSAtLiAuLi0gLi4uIC8gLSAtLiAuIC0uLS4gLi4tIC4tLi4gLyAuIC4tIC4uLSAtLS4tIC8gLi0gLi4gLS4gLS0gLS0tIC8gLS4gLS0tIC0uIC8gLi0uLS4tIC0tLSAtLi4uIC4uIC4tLiAtLi0uIC4uLiAuIC4tLiAvIC4uLiAuLiAtLSAuLiAuLS4gLS4tLiAuLSAuLS4uIC8gLS4tLiAtLiAuLi0gLS4gLyAtLS4uLS0gLi4gLi4uLSAuIC4tLi4gLi0tLiAtLSAuLiAvIC0tLSAuLiAtLi4gLS0tIC8gLS0gLi4tIC0uLS4gLyAtLSAuLiAuLS4uIC0tLSAvIC4uLiAuLSAuLi0gLS0uLSAvIC4uLiAuIC0uLS4gLiAuLS4gLi0tLiAvIC0tLi4tLSAtIC4tIC4uIC0uLS4gLi4uIC8gLi0gLi0uLiAuLS4uIC4uIC8gLSAuLi0gLyAtLS0uLi4gLS0tIC4uIC4tLS4gLi4tIC0uLS4gLyAtLSAuIC4tLiAvIC0tIC4tIC0uIC4uLSAvIC0tLi4tLSAtLS0gLiAuLi4gLS4gLi0gLi0uIC0gLyAtLSAuLiAtIC4tIC0uLiAuLSAuLS4gLS0uIC8gLS4uIC0tLSAuLi0gLS0uLSAvIC4gLi0uIC0tLSAuLS0uIC0tIC4gLSAvIC0tLSAuLi0gLS0uLSAuLiAuLS4uIC4gLi0uIC8gLS4gLi4gLyAtIC4gLyAuLiAuLi0gLi4tLiAvIC4uLiAuLi0gLSAtLi0uIC4tIC4tLiAuLi0uIC8gLiAtLi4gLi0uLiAuLSAuLi0tIC8gLi0gLi4gLi4tIC0tLi0gLyAtLi4gLiAuLi4gLi4gLi4tIC4uLS4gLyAuLi4gLi4tIC4tLi4gLi0gLS0gLyAuLSAuLiAuLi0gLS0uLSAvIC0uIC0tLSAtLiAvIC0tLi4tLSAtLS0gLSAtLiAuIC0tIC4gLS0gLyAtLS4uLS0gLi4uIC4uIC4tLiAuIC4uIC0uLiAuLi0gLi0gLyAtLSAuLi0gLiAtLSAvIC0uIC4gLS0gLS0tIC0uIC8gLS0tIC0uLiAtLiAuLSAuLi0gLS0uLSAuLiAuLS4uIC4tIC8gLi4gLi4uIC8gLS4uIC4gLi4uIC8gLS0uLi0tIC0gLi4gLS4uLiAuLSAtLi4gLyAtLiAtLS0gLS4gLyAtLSAuIC0uIC0tLSAuLiAuLi4gLi0gLS4tLiAtLi0uIC0tLSAvIC0tIC4tIC0uLiAtLiAuLi0gLS4tLiAuIC4uLiAvIC4uIC4uLiAgLi4gLS0gLyAuLSAtIC4uIC4uLi0gLyAuIC4uLiAuLi4gLi0gLSAuLS4gLS0tIC4uLS4gLyAtIC4uIC0uLS4gLiAuLi0uIC4gLS4uIC8gLS4uIC4gLi4uIC8gLS0uLi0tIC4gLSAtLi0uIC4gLi0uIC8gLSAuLiAuLi0gLi0uLiAtLS0gLi4uLSAvIC4gLi0uIC4tIC0tIC4tIC8gLS0tIC0uLiAtLiAuLSAuLi0gLS0uLSAuLiAuLS4uIC4tIC8gLi4gLi4tIC0tLi0gLyAuLi4gLi4gLyAtIC4uLSAvIC0tLSAuLS4uIC0tLSAuLi4tIC8gLi4gLi0uIC4tIC4tLiAtLS0gLS0gLiAtLSAvIC0tIC4uLSAtIC0uIC4tIC0gLyAuLS4tLi0gLS0tIC4tLi4gLS0tIC0uIC8gLi4gLSAtIC4uIC0tIC4gLi0uIC8gLiAuLi4gLi4uIC4uIC0uLiAtLS0gLi4tLiAvIC4uLiAuLi0gLi4gLiAvIC0tIC4uLSAuLS4gLS4tLiAuLS4uIC4uLSAuLS0uIC4gLi4uIC8gLS0gLi4tIC4uLiAuLS0uIC4uIC8gLiAtLSAvIC0gLiAvIC4tLi0uLSAuLS4tLi0gLi0uLS4tIC4gLi4uIC4uLiAuLiAuLi0gLi4tLiAvIC0tIC4uLSAtIC4tIC0tIC4tIC8gLS0tIC0uLiAtLiAuLSAuLi0gLS0uLSAuLiAuLS4uIC4tIC8gLiAtLSAvIC0tIC4uIC4tLiAuIC0uIC4uIC0tIC4gLS0gLyAtIC4uLSAvIC0tLi4tLSAtIC4gLi4uIC4uLiAuLiAuLi0gLS0uLSAuLiAuLS4uIC4gLi0uIC8gLS0tIC4gLS0gLyAuIC4tLiAtLS0gLi0tLiAtLS0gLi4uIC8gLS4gLi4gLyAuLi4gLi4tIC4uIC4gLyAuLi4gLi4tIC0gLi0uLiAuLi0gLi4uLSAvIC4tIC0gLS4gLiAtLSAtLS4gLi0gLi0uIC4uLS4gLyAuIC4uLiAuLS0uIC4uIC8gLi4uIC4uLSAuIC0uLiAvIC4uIC4uLiAuLSAuLi0gLS0uLSAvIC0tLi4tLSAuLiAuLi4tIC4uIC4uLiAuIC4tIC4uLSAtLS4tIC8gLi4uIC4uIC4uIC0uIC0tIC0tLSAuLi4gLyAtLiAuLiAvIC4uLiAuLi0gLi4gLiAvIC0tIC4tIC4tLiAtLi4uIC0tIC4uLSAvIC0tLi4tLSAtLS0gLi4uLSAuLiAuLSAuLS4gLi0tIC4tIC8gLS4gLi4gLyAtLSAuLi0gLi4uIC8gLi4uIC4uLSAtIC4tIC0uIC0tLSAtLi0uIC8gLiAuLS4gLi0gLS0gLi0gLi0uLiAtLi0uIC8gLS0gLi4tIC4uLiAuLi4gLS0tIC4tLS4gLyAtLiAtLS0gLS4gLyAuLiAtIC0uLS4gLiAuLS4uIC4tLS4gLS0gLi0gLyAuLi4gLi0gLi4tIC0tLi0gLyAtIC4tIC4uLi0gLi0uIC4gLi4uIC8gLi4uIC4tIC0tIC4uIC4tLiAtLi0uIC4tIC4tLi4gLyAuLiAuLi0gLS0uLSAvIC4uLiAuIC4uIC0uLiAvIC4tLi0uLSAuLS0gLi4gLS4uIC0tLSAvIC0tIC4gLi4tIC0tLi0gLyAuLi4gLiAuLiAtLi4gLyAtIC4uLiAuIC8gLS4tLiAtLiAuLi0gLS4gLyAtLS4uLS0gLSAuLSAtLi4uIC4tIC0gLi4uIC4uIC0uLiAvIC4gLS0gLyAuLSAvIC4gLi4gLS4uIC8gLS0tIC0uIC4uLSAvIC4tIC4uIC4uLSAtLS4tIC8gLS0uLi0tIC0tIC4tIC0uLi4gLi0gLi0uLiAuLS4uIC4gLi0tLiAuLS0uIC4tIC8gLi0uLi0uIC0tIC4gLi0uIC4tIC4tLi4gLi4tIC0tLiAtLiAuLiAuLi4gLi0uLi0uIC8gLi0uIC4gLi0tLiAtLSAuIC4uLiAvIC0tIC4gLi4tIC0tLi0gLyAtLS4uLS0gLi4uIC4uLSAuLiAuIC8gLi4uIC4uIC4tLi4gLi0gLSAuLSAtLiAvIC4uLiAuIC4uIC0uLiAvIC4tLi0uLSAuLiAtLi4tIC4uLSAuLS4gLSAuLi4gLiAtLi4gLyAtLSAuLi0gLiAvIC0tIC4tIC4uLSAtLS4tIC0gLi4uIC0tLSAuLS0uIC8gLi4uIC4uIC4uLi0gLi0gLi0uIC0tLiAvIC4uLiAuLiAtLSAuLiAtLiAvIC0gLi4uIC4gLyAuLi4gLi4tIC0gLS4tLiAuLSAuLi0uIC8gLi4uIC4uLSAtLi4gLS4gLi4tIC0tIC8gLS4uIC0tLSAuLi0gLS0uLSAvIC0uLiAuIC4uLiAvIC0tLi4tLSAuIC4tLiAtLS0gLi0tLiAtLSAuIC0gLyAtLiAtLS0gLS4gLSAuLiAuLiAtLi4uIC4tIC8gLi0gLi0uLiAuLS4uIC4uIC8gLi4gLi4uLSAuLSAuIC4tLiAtLi0uIC8gLiAuLi4gLi0tLiAuLiAvIC4uLiAuLSAuLi0gLS0uLSAvIC0gLi4gLS4uIC4uIC0uLS4gLiAtLi0uIC8gLi4uIC4tIC4tLiAtLi4uIC4gLS4gLiAtIC8gLS4gLi4gLyAuIC0tIC8gLS0gLi4tIC0uLS4gLyAuLSAtLiAuLi0gLyAtLS4uLS0gLSAuLiAuLi0gLi4tLiAvIC4tIC0tIC4uIC4uLiAuLi4gLi4gLi0uIC4gLS4tLiAtLiAuLiAuLi4gLyAuIC4tIC4uLSAtLS4tIC8gLS0uLi0tIC4tIC4tLi4gLi0uLiAuLiAvIC0uLS4gLiAtLiAtLS0gLS4uIC8gLS0uLi0tIC4gLi0uIC4tIC4uLSAtLS4tIC4gLi0gLyAuLSAuLiAtLiAtLSAtLS0gLyAtLSAuIC0uIC0tLSAuLiAtIC4tLi4gLi4tIC8gLi4gLi4uLSAuLSAtIC4uLSAuLS0uIC8gLi0uLS4tIC0gLS4gLi4tIC4uLiAvIC4gLi0gLS4uLSAuIC4tLi4gLi0tLiAtLSAuLSAvIC0tIC4uLSAuLiAtLi4gLS0tIC8gLiAuLSAuIC0tIC8gLi4uIC4uLSAtLiAuLSAtLSAvIC0uLiAuIC4uLiAvIC0tLi4tLSAuLiAuLi0gLi0uLiAtLS0gLi4uLSAvIC4gLi4uIC4uLiAuIC8gLi4uIC0tLSAuLS4gLiAuLi4uIC8gLi0uLS4tIC4gLi0gLiAtLSAvIC4uLiAuIC0uLS4gLiAuLS4gLi0tLiAvIC0tIC4tIC4uLSAtLS4tIC8gLSAuLSAuLS4gLiAvIC4tLiAtLS0gLi4gLi0uIC4gLi0uLiAuIC0uLS4gLyAuLSAuIC0tIC8gLi0gLi4gLSAuLiAtIC4tLi4gLi4tIC0gLi4uIC8gLS4uIC4gLi4uIC8gLi0uIC4gLi0tLiAuLi4gLi4gLi0uLiAuLi0gLi0gLi0tLiAvIC4uIC4uLiAvIC0tIC4tIC4uIC0gLiAvIC0tLi4tLSAuIC4tLiAuIC0uLiAuLiAuLS4gLiAtLi4gLyAuIC0tIC8gLiAuLS4gLi0gLi4uIC4uLiAuIC0uLS4gLyAuLiAuLi4gLi0gLi4tIC0tLi0gLyAtLSAuLi0gLS4uIC0uIC4uLSAtLSAvIC0gLi4gLS4tLiAuIC4uLS4gLyAtLi4tIC0tLSAuLi4tIC8gLi4uIC4uLSAuLiAuLi0gLS4tLiAvIC0tLi4tLSAtLS0gLSAuLi4gLiAuLi0uIC8gLiAuLiAtLi4gLyAuLi4gLi4tIC0uIC4uIC0gLi4tIC0gLi0gLS0gLyAuLS4uIC0tLSAuLi4gLyAtLSAuLSAuLi0gLS0uLSAvIC0gLi0gLi0uIC4gLyAuLi4gLi4tIC4uIC0uLiAuLiAuLS4uIC4tIC0uLS4gLyAuLS4gLS0tIC0uLS4gLyAuLi4gLi4tIC4uIC4uLSAtLi0uIC8gLS0uLi0tIC4uIC4uLi0gLi0gLS0gLi0gLyAtLSAuIC4uLSAtLS4tIC4uIC4tLi4gLi0gLyAtLS0uLi4gLS0tIC4uIC0uLS4gLi4uIC8gLS0gLi4tIC0uIC4uLSAvIC4uIC0gLi0gLS4gLi0gLi4uIC8gLS0gLi0gLi4tIC0tLi0gLS0gLi4tIC0uIC8gLi4uIC4uIC4tLiAuIC0uIC4tLi4gLi4tIC4uLi0gLyAuIC4tIC4uIC4uLSAtLS4tIC4uIC4tLi4gLiAuLS4gLyAtLSAuLi0gLSAtLiAuLSAtIC8gLS4gLi0gLyAtLS4uLS0gLSAuLiAuLi4gLyAuLSAuLiAtIC0uIC4gLSAuLiAtLiAuIC4tIC4tLS4gLyAuIC4tLiAuIC4uLi0gLyAtLi0uIC0tLSAuLi4uIC8gLS0gLi4tIC4tLiAtIC4uLSAvIC0tLSAuLiAtLi0uIC4uLiAuIC0u";
         const SECRET_SONG_PLAYER_ID_PREFIX = 'secret-song-player';
-        const YOUTUBE_VIDEO_ID_666 = 'CcnzvIM5XX0'; // Video ID untuk 666
-        // GANTI ID VIDEO DI BAWAH INI UNTUK TRIGGER 777
-        const YOUTUBE_VIDEO_ID_777 = 'bA9YxXkQ0f4'; // John Mayer - You're Gonna Live Forever in Me
-        const YOUTUBE_VIDEO_ID_8427 = 'whoUiCIeke4'; // GANTI INI DENGAN ID VIDEO YANG BENAR
+        const YOUTUBE_VIDEO_ID_666 = 'CcnzvIM5XX0';
+        const YOUTUBE_VIDEO_ID_777 = 'bA9YxXkQ0f4';
+        const YOUTUBE_VIDEO_ID_8427 = 'whoUiCIeke4';
 
-        const SUMBER_GAMBAR_GAME_MEMORI = ["1.jpg", "2.jpeg", "3.jpeg", "4.jpeg", "5.jpeg", "6.jpeg"]; // Pastikan nama berkas ini benar
+        const SUMBER_GAMBAR_GAME_MEMORI = ["1.jpg", "2.jpeg", "3.jpeg", "4.jpeg", "5.jpeg", "6.jpeg"];
     const TOTAL_PASANGAN_GAME_MEMORI = SUMBER_GAMBAR_GAME_MEMORI.length;
     const BATAS_KESALAHAN_GAME_MEMORI = 4;
     const DURASI_KUNCI_GAME_MEMORI = 3 * 60 * 60 * 1000;
@@ -2472,10 +2365,6 @@ Buat Dia, itu peluru terakhir yang nembus jantungnya.
     let timerBalikSatuKartuGameMemori = null;
     let intervalTimerKunciGameMemori = null;
 
-
-
-
-        // --- Secret Messages ---
 const SECRET_MESSAGES_LIST = [
     "they stood silent where no light reached, their presence said nothing but meant everything. maybe it’s been said three times already, just never out loud.",
     "when a question is asked too many times and answered the same way, it stops being a question. maybe luck is just repetition in disguise.",
@@ -2496,7 +2385,7 @@ const SECRET_MESSAGES_LIST = [
 const SecretMessageManager = {
     container: null,
     currentMessageTimeout: null,
-    messageLoopTimeout: null, // Menggunakan setTimeout untuk interval acak
+    messageLoopTimeout: null, 
 
     init: () => {
         SecretMessageManager.container = document.getElementById('secret-message-container');
@@ -2504,12 +2393,9 @@ const SecretMessageManager = {
             SecretMessageManager.container = document.createElement('div');
             SecretMessageManager.container.id = 'secret-message-container';
             SecretMessageManager.container.setAttribute('aria-live', 'polite');
-            // Kita akan append ke body di Cache jika Cache sudah terdefinisi, atau document.body jika belum
             const targetParent = Cache.body || document.body;
             targetParent.appendChild(SecretMessageManager.container);
         }
-        // Penyesuaian styling awal jika diperlukan (misal warna font berdasarkan dark mode saat init)
-        // sudah dihandle di displayMessage
     },
 
 
@@ -2520,8 +2406,6 @@ const SecretMessageManager = {
     },
 
     displayMessage: () => {
-        // Jangan tampilkan pesan jika masih di intro atau container tidak ada
-        // Atau jika youtube video sedang aktif
         if (!SecretMessageManager.container ||
             (Cache.introSection && getComputedStyle(Cache.introSection).display !== 'none') ||
             (Cache.youtubeVideoOverlay && getComputedStyle(Cache.youtubeVideoOverlay).display === 'flex')) {
@@ -2531,7 +2415,7 @@ const SecretMessageManager = {
         if (SecretMessageManager.currentMessageTimeout) {
             clearTimeout(SecretMessageManager.currentMessageTimeout);
         }
-        SecretMessageManager.container.innerHTML = ''; // Hapus pesan sebelumnya
+        SecretMessageManager.container.innerHTML = ''; 
 
         const message = SecretMessageManager.getRandomMessage();
         const messageElement = document.createElement('span');
@@ -2547,11 +2431,10 @@ const SecretMessageManager = {
         SecretMessageManager.container.classList.add('visible');
         SecretMessageManager.container.classList.remove('hidden');
 
-        // Sembunyikan container setelah animasi pesan selesai (2 detik) + sedikit buffer
         SecretMessageManager.currentMessageTimeout = setTimeout(() => {
             SecretMessageManager.container.classList.remove('visible');
             SecretMessageManager.container.classList.add('hidden');
-        }, 4000); // Durasi pesan sama dengan animasi
+        }, 4000); 
     },
 
     startLoop: () => {
@@ -2561,17 +2444,14 @@ const SecretMessageManager = {
 
         const showAndScheduleNext = () => {
             SecretMessageManager.displayMessage();
-            // Interval acak antara 8000 ms (8 detik) dan 12000 ms (12 detik)
-            // Total durasi = (2 detik pesan) + (6-10 detik jeda)
-            const randomInterval = Math.random() * (10000 - 6000) + 6000; // Jeda acak 6-10 detik
-            SecretMessageManager.messageLoopTimeout = setTimeout(showAndScheduleNext, 4000 + randomInterval); // 2 detik tampil + jeda
+            const randomInterval = Math.random() * (10000 - 6000) + 6000; 
+            SecretMessageManager.messageLoopTimeout = setTimeout(showAndScheduleNext, 4000 + randomInterval); 
         };
         
-        // Beri jeda sedikit sebelum pesan pertama muncul setelah main content tampil
         setTimeout(showAndScheduleNext, Math.random() * (3000 - 1000) + 1000);
     },
 
-    stopLoop: () => { // Untuk menghentikan jika perlu
+    stopLoop: () => { 
         if (SecretMessageManager.messageLoopTimeout) {
             clearTimeout(SecretMessageManager.messageLoopTimeout);
         }
@@ -2586,17 +2466,15 @@ const SecretMessageManager = {
 
     
 };
-// --- End Secret Messages ---
-
 
         const PLAYERS_DATA = [ 
             { idPrefix: 'fuchsia',  track: { title: "Oblivium", artist: "nLebron James", src: "phase38.mp3" },  
               theme: { color: 'fuchsia', glow: 'fuchsia', mainTextColor: 'white', playerBoxBg: 'transparent', playerBoxText: 'white', seekBarThumb: 'white', logoSpin: 'spin-fuchsia'} },
             { idPrefix: 'emerald',  track: { title: "Exsilum Innocentiae", artist: "Anjing", src: "thanks.mp3" }, 
               theme: { color: '#2ecc71', glow: '#2ecc71', mainTextColor: 'white', playerBoxBg: 'white', playerBoxText: '#333', seekBarThumb: '#2ecc71', logoSpin: 'spin-emerald'} },
-            { idPrefix: 'burgundy', track: { title: "Tenebris Speravi", artist: "Zenmatho", src: "mia.mp3" }, 
+            { idPrefix: 'burgundy', track: { title: "Tenebris Speravi", artist: "Zen", src: "mia.mp3" }, 
               theme: { color: '#800020', glow: '#800020', mainTextColor: 'white', playerBoxBg: 'rgba(255,255,255,0.9)', playerBoxText: '#4c0013', seekBarThumb: '#800020', logoSpin: 'spin-burgundy'} },
-            { idPrefix: 'ivory',    track: { title: "Lacrimae Obscurae", artist: "wiwok de tok. sok tau laguny bangsat", src: "phasegiygas.mp3" }, 
+            { idPrefix: 'ivory',    track: { title: "Lacrimae Obscurae", artist: "we walk the talk not only talk the talk", src: "phasegiygas.mp3" }, 
               theme: { color: '#FFFFF0', glow: '#E0E0D0', mainTextColor: '#4A4A4A', playerBoxBg: '#F8F8F0', playerBoxText: '#505050', seekBarThumb: '#808078', logoSpin: 'spin-ivory'} }
         ];
         
@@ -2626,7 +2504,6 @@ const SecretMessageManager = {
             playerPrev:{ count: 0, threshold: 24, song: { title: "Dear God", artist: "Avenged Sevenfold", src: "deargod.mp3", theme: {color: "#607D8B", glow: "#455A64", playerBoxBg: "white", playerBoxText: "#333", seekBarThumb: "#37474F", mainTextColor: "white", logoSpin: "spin-secret-song-player"}}}
         };
         
-        // --- Utility Functions ---
         const Utils = {
             formatTime: (seconds) => {
                 const m = Math.floor(seconds / 60);
@@ -2655,7 +2532,6 @@ const SecretMessageManager = {
             }
         };
 
-        // --- UI Management ---
         const UIManager = {
             toggleDarkMode: () => {
                 State.isDarkMode = Cache.body.classList.toggle('dark-mode');
@@ -2669,7 +2545,9 @@ const SecretMessageManager = {
                 let mainContentWasVisibleWhenToggled = false;
                 if (Cache.storyTextParagraph && State.originalStoryTextHTML) {
                     if (Cache.mainContent && getComputedStyle(Cache.mainContent).display !== 'none') {
-                        mainContentWasVisibleWhenToggled = true; // Catat bahwa konten utama sedang terlihat
+                        mainContentWas
+
+                        VisibleWhenToggled = true; 
                         Cache.storyTextParagraph.innerHTML = State.isDarkMode ? MORSE_MESSAGE_FOR_STORY : State.originalStoryTextHTML;
                          Cache.storyTextParagraph.style.color = State.isDarkMode ? 
                             getComputedStyle(Cache.body).getPropertyValue('--story-text-color-dark') :
@@ -2698,21 +2576,17 @@ const SecretMessageManager = {
             }
 
             if (mainContentWasVisibleWhenToggled && typeof SadEffectManager !== 'undefined' && SadEffectManager.initEffect) {
-        // Beri sedikit waktu agar DOM update sepenuhnya setelah perubahan innerHTML
         setTimeout(() => {
-             // Tambahan pengecekan elemen penting di sini sebelum memanggil
             const triggerMeninggal = document.getElementById('trigger_teks_meninggal');
             const triggerPenutup = document.getElementById('story_point_penutupan');
-            if (Cache.sadEffectOverlay && triggerMeninggal && triggerPenutup) {
-                SadEffectManager.initEffect();
+            if (Cache.body.classList.contains('sad-effect-active') || (triggerMeninggal && triggerPenutup)) {
+                 SadEffectManager.initEffect();
             } else {
-                console.warn("applyCurrentDarkModeStyles: Elemen penting untuk SadEffectManager tidak ditemukan setelah update innerHTML, tidak memanggil initEffect.");
+                 console.warn("applyCurrentDarkModeStyles: Elemen penting untuk SadEffectManager tidak ditemukan setelah update innerHTML, tidak memanggil initEffect.");
             }
-        }, 100); // Penundaan singkat, bisa disesuaikan jika perlu lebih lama
+        }, 100); 
     }
 },
-            
-
             
             setWidgetVisibility: (visible) => {
                 const displayStyle = visible ? 'block' : 'none'; 
@@ -2822,9 +2696,7 @@ const SecretMessageManager = {
 
         const StoryProgressManager = {
     currentHighlightedPointId: null,
-    lastReachedPointKey: 'ceritaAdzanTerakhirDicapai', // Key untuk localStorage
-
-    // Fungsi untuk menyorot dan scroll ke titik tertentu
+    lastReachedPointKey: 'ceritaAdzanTerakhirDicapai', 
     markAndScrollToPoint: (pointId) => {
         const pointElement = document.getElementById(pointId);
         if (!pointElement) {
@@ -2832,7 +2704,6 @@ const SecretMessageManager = {
             return;
         }
 
-        // Hapus sorotan dari titik sebelumnya (jika ada)
         if (StoryProgressManager.currentHighlightedPointId) {
             const prevElement = document.getElementById(StoryProgressManager.currentHighlightedPointId);
             if (prevElement) {
@@ -2842,43 +2713,32 @@ const SecretMessageManager = {
             }
         }
 
-        // Scroll ke titik baru
         pointElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-        // Tambahkan sorotan ke titik baru
         pointElement.classList.add('story-marker-highlight');
         
-        // Tambahkan teks "Kamu sudah sampai sini" sementara
         const markerText = document.createElement('span');
         markerText.className = 'story-marker-text';
         markerText.textContent = "📍 Terakhir kamu membaca sampai sini.";
-        // (Style warna teks marker sudah dihandle oleh CSS global dark/light mode)
-        pointElement.insertAdjacentElement('afterend', markerText); // Sisipkan setelah span penanda
+        pointElement.insertAdjacentElement('afterend', markerText); 
         
-        // Buat teks marker terlihat dengan transisi
-        setTimeout(() => markerText.classList.add('visible'), 50); // Delay kecil untuk transisi
+        setTimeout(() => markerText.classList.add('visible'), 50); 
 
         StoryProgressManager.currentHighlightedPointId = pointId;
         try {
             localStorage.setItem(StoryProgressManager.lastReachedPointKey, pointId);
         } catch(e) { console.warn("Gagal menyimpan progres cerita ke localStorage:", e); }
 
-        // Hilangkan teks marker dan highlight setelah beberapa detik
         setTimeout(() => {
             markerText.classList.remove('visible');
-            setTimeout(() => { // Tunggu transisi opacity selesai sebelum remove
+            setTimeout(() => { 
                  if (markerText.parentNode) markerText.remove();
-            }, 600); // Sedikit lebih lama dari transisi opacity markerText
+            }, 600); 
             
-            // Opsional: Jika Anda ingin highlight permanen di span-nya, jangan remove class 'story-marker-highlight'
-            // Jika ingin highlight juga hilang, uncomment baris di bawah:
-            // pointElement.classList.remove('story-marker-highlight');
-        }, 7000); // Teks dan highlight hilang setelah 7 detik
+        }, 7000); 
     },
 
-    // Fungsi untuk memuat titik terakhir yang dicapai dari localStorage saat halaman dimuat
     loadLastReachedPoint: () => {
-        // Hanya jalankan jika main content sudah terlihat
         if (!(Cache.mainContent && getComputedStyle(Cache.mainContent).display !== 'none')) {
             return;
         }
@@ -2888,10 +2748,8 @@ const SecretMessageManager = {
             if (lastPointId) {
                 const element = document.getElementById(lastPointId);
                 if (element) {
-                    // Scroll langsung (tanpa smooth) agar pengguna tidak kaget saat reload
                     element.scrollIntoView({ behavior: 'auto', block: 'center' });
                     
-                    // Tambahkan highlight sementara saat load
                     element.classList.add('story-marker-highlight');
                      const markerText = document.createElement('span');
                      markerText.className = 'story-marker-text';
@@ -2905,9 +2763,9 @@ const SecretMessageManager = {
                         setTimeout(() => {
                             if(markerText.parentNode) markerText.remove();
                         }, 600);
-                    }, 3000); // Highlight & teks singkat selama 3 detik saat load
+                    }, 3000); 
 
-                    StoryProgressManager.currentHighlightedPointId = lastPointId; // Set agar tidak terpicu ulang
+                    StoryProgressManager.currentHighlightedPointId = lastPointId; 
                     console.log("StoryProgressManager: Kembali ke titik terakhir:", lastPointId);
                 }
             }
@@ -2915,7 +2773,6 @@ const SecretMessageManager = {
     }
 };
 
-        // --- Effects & Special Triggers ---
         const Effects = {
             preventScreenshotAndRecording: () => {
                 document.addEventListener('keydown', (e) => {
@@ -2930,7 +2787,7 @@ const SecretMessageManager = {
                 });
             },
             triggerScaryEffectDateTime: () => {
-                State.isScaryEffectActive = true; // Tandai efek aktif
+                State.isScaryEffectActive = true; 
                 const originalBodyStyle = { 
                     background: Cache.body.style.background,
                     backgroundImage: Cache.body.style.backgroundImage,
@@ -2990,33 +2847,28 @@ const SecretMessageManager = {
                     
                     UIManager.applyCurrentDarkModeStyles(); 
                     State.dateTimeLogoClickCount = 0; 
-                    State.isScaryEffectActive = false; // Tandai efek selesai
+                    State.isScaryEffectActive = false; 
                 }, 4000);
             }
         };
 
-      // --- Calculator Logic ---
       const Calculator = {
-            // ===== AWAL TAMBAHAN: FUNGSI UNTUK MEMUTAR AUDIO DAN RESET =====
             playDirectAudioAndReset: (srcFile) => {
                 const audioPlayer = document.getElementById('direct-audio-player');
                 if (audioPlayer) {
                     audioPlayer.src = srcFile;
                     audioPlayer.play().catch(e => console.error("Error playing direct audio:", srcFile, e));
 
-                    // Reset state kalkulator internal
                     State.currentCalcInput = '';
                     State.previousCalcInput = '';
                     State.calcOperator = null;
-                    Calculator.updateDisplay('Audio...'); // Atau teks lain
-                    setTimeout(() => Calculator.updateDisplay('0'), 1500); // Display kembali ke '0'
+                    Calculator.updateDisplay('Audio...'); 
+                    setTimeout(() => Calculator.updateDisplay('0'), 1500); 
 
-                    // Reset semua sequence tracker yang ada
-                    State.calcInputSequence = []; // Untuk NUMBER_TEXT_MAP
+                    State.calcInputSequence = []; 
                     State.calcInputSequence666 = []; State.calcInputSequence777 = [];
                     State.calcInputSequence328 = []; State.calcInputSequence8427 = [];
                     State.calcInputSequence115 = []; State.calcInputSequence2022 = [];
-                    // Sequence baru untuk audio:
                     State.calcInputSequence123 = []; State.calcInputSequence320 = [];
                     State.calcInputSequence916 = []; State.calcInputSequence518 = [];
                     State.calcInputSequence2010 = [];  State.calcInputSequence402 = []; 
@@ -3024,7 +2876,6 @@ const SecretMessageManager = {
                     console.error("Elemen audio dengan ID 'direct-audio-player' tidak ditemukan.");
                 }
             },
-            // ===== AKHIR TAMBAHAN: FUNGSI PLAY DIRECT AUDIO =====
 
             updateDisplay: (value) => {
                 if (Cache.calcDisplay) Cache.calcDisplay.textContent = value || '0';
@@ -3041,14 +2892,10 @@ const SecretMessageManager = {
                 }
             },
             handleInput: (value) => {
-                if (!isNaN(parseInt(value)) && value !== '.') { // Check if it's a digit
-                    // --- AWAL BAGIAN PENGECEKAN SEQUENCE (BISA RETURN) ---
-
-                    // Handle 666 sequence
+                if (!isNaN(parseInt(value)) && value !== '.') { 
                     State.calcInputSequence666.push(value);
                     if (State.calcInputSequence666.join('') === '666') {
-                        YouTubePlayer.showVideoById(YOUTUBE_VIDEO_ID_666, true); // true for audio
-                        // Reset SEMUA sequences setelah trigger video/lagu
+                        YouTubePlayer.showVideoById(YOUTUBE_VIDEO_ID_666, true); 
                         State.calcInputSequence = []; State.calcInputSequence666 = []; State.calcInputSequence777 = [];
                         State.calcInputSequence328 = []; State.calcInputSequence8427 = [];
                         State.calcInputSequence115 = []; State.calcInputSequence2022 = [];
@@ -3064,11 +2911,9 @@ const SecretMessageManager = {
                         State.calcInputSequence666.shift();
                     }
 
-                    // Handle 777 sequence
                     State.calcInputSequence777.push(value);
                     if (State.calcInputSequence777.join('') === '777') {
-                        YouTubePlayer.showVideoById(YOUTUBE_VIDEO_ID_777, true); // true for audio
-                        // Reset SEMUA sequences
+                        YouTubePlayer.showVideoById(YOUTUBE_VIDEO_ID_777, true); 
                         State.calcInputSequence = []; State.calcInputSequence666 = []; State.calcInputSequence777 = [];
                         State.calcInputSequence328 = []; State.calcInputSequence8427 = [];
                         State.calcInputSequence115 = []; State.calcInputSequence2022 = [];
@@ -3084,18 +2929,16 @@ const SecretMessageManager = {
                         State.calcInputSequence777.shift();
                     }
 
-                    // Handle 328 sequence
                     if (State.is328TriggerEnabled) {
                         State.calcInputSequence328.push(value);
                         if (State.calcInputSequence328.join('') === '328') {
                             LocalVideoManager.showPlayer('secretvideo.mp4');
-                             // Reset SEMUA sequences
                             State.calcInputSequence = []; State.calcInputSequence666 = []; State.calcInputSequence777 = [];
                             State.calcInputSequence328 = []; State.calcInputSequence8427 = [];
                             State.calcInputSequence115 = []; State.calcInputSequence2022 = [];
                             State.calcInputSequence123 = []; State.calcInputSequence320 = [];
                             State.calcInputSequence916 = []; State.calcInputSequence518 = [];
-                            State.calcInputSequence2010 = [];  State.calcInputSequence402 = []; //
+                            State.calcInputSequence2010 = [];  State.calcInputSequence402 = []; 
                             State.currentCalcInput = '';
                             State.previousCalcInput = '';
                             State.calcOperator = null;
@@ -3110,10 +2953,9 @@ const SecretMessageManager = {
                         State.calcInputSequence402.push(value);
                         if (State.calcInputSequence402.join('') === '402') {
                             LocalVideoManager.showPlayer('veo3.mp4');
-                            // Reset SEMUA sequences
                             State.calcInputSequence = []; State.calcInputSequence666 = []; State.calcInputSequence777 = [];
                             State.calcInputSequence328 = []; State.calcInputSequence8427 = [];
-                            State.calcInputSequence402 = []; // Reset juga dirinya sendiri
+                            State.calcInputSequence402 = []; 
                             State.calcInputSequence115 = []; State.calcInputSequence2022 = [];
                             State.calcInputSequence123 = []; State.calcInputSequence320 = [];
                             State.calcInputSequence916 = []; State.calcInputSequence518 = [];
@@ -3128,14 +2970,13 @@ const SecretMessageManager = {
 
                     State.calcInputSequence8427.push(value);
                     if (State.calcInputSequence8427.join('') === '8427') {
-                        YouTubePlayer.showVideoById(YOUTUBE_VIDEO_ID_8427, true); // true untuk audio
-                        // Reset SEMUA sequences
+                        YouTubePlayer.showVideoById(YOUTUBE_VIDEO_ID_8427, true); 
                         State.calcInputSequence = []; State.calcInputSequence666 = []; State.calcInputSequence777 = [];
                         State.calcInputSequence328 = []; State.calcInputSequence8427 = [];
                         State.calcInputSequence115 = []; State.calcInputSequence2022 = [];
                         State.calcInputSequence123 = []; State.calcInputSequence320 = [];
                         State.calcInputSequence916 = []; State.calcInputSequence518 = [];
-                        State.calcInputSequence2010 = [];  State.calcInputSequence402 = []; //
+                        State.calcInputSequence2010 = [];  State.calcInputSequence402 = []; 
                         State.currentCalcInput = '';
                         State.previousCalcInput = '';
                         State.calcOperator = null;
@@ -3145,20 +2986,18 @@ const SecretMessageManager = {
                         State.calcInputSequence8427.shift();
                     }
 
-                   // Urutan 115 -> mesin.mp3
                    State.calcInputSequence115.push(value);
                         if (State.calcInputSequence115.join('') === '115') {
                             Calculator.playDirectAudioAndReset('mesin.mp3'); 
                             if (typeof StoryProgressManager !== 'undefined') {
-        StoryProgressManager.markAndScrollToPoint('story_point_kejadian_maret'); // Tandai titik kejadian Maret
+        StoryProgressManager.markAndScrollToPoint('story_point_kejadian_maret'); 
     }
     return;
 
-                        } else if (State.calcInputSequence115.length >= 3) { // Maks panjang 3
+                        } else if (State.calcInputSequence115.length >= 3) { 
                             State.calcInputSequence115.shift();
                         }
 
-                        // Urutan 2022 -> memory.mp3
                         State.calcInputSequence2022.push(value);
                         if (State.calcInputSequence2022.join('') === '2022') {
                             Calculator.playDirectAudioAndReset('memory.mp3');
@@ -3167,41 +3006,32 @@ const SecretMessageManager = {
     }
     return;
 
-                        } else if (State.calcInputSequence2022.length >= 4) { // Maks panjang 4
+                        } else if (State.calcInputSequence2022.length >= 4) { 
                             State.calcInputSequence2022.shift();
                         }
 
-                        State.calcInputSequence123.push(value); // Tetap tambahkan input ke sequence
+                        State.calcInputSequence123.push(value); 
 
 if (State.calcInputSequence123.join('') === '123') {
     if (!State.pemicu123PertamaSudahTerjadi) {
-        // Ini adalah pemicu "123" yang PERTAMA (untuk babak SMP)
         Calculator.playDirectAudioAndReset('fallen.mp3');
         if (typeof StoryProgressManager !== 'undefined') {
             StoryProgressManager.markAndScrollToPoint('story_point_smp_intro');
         }
-        State.pemicu123PertamaSudahTerjadi = true; // Tandai bahwa pemicu pertama sudah terjadi
-        State.calcInputSequence123 = []; // Reset sequence 123 agar bisa digunakan lagi nanti
-        return; // Keluar setelah tindakan selesai
+        State.pemicu123PertamaSudahTerjadi = true; 
+        State.calcInputSequence123 = []; 
+        return; 
     } else {
-        // Ini adalah pemicu "123" yang KEDUA (atau selanjutnya, untuk babak Penutupan)
-        // Kita asumsikan ini dipanggil setelah 'story_point_kejadian_maret'
-        // Anda bisa menambahkan pengecekan `StoryProgressManager.currentHighlightedPointId` di sini jika perlu validasi lebih ketat
-        
-        Calculator.playDirectAudioAndReset('fallen.mp3'); // Anda bisa gunakan audio yang sama atau berbeda
+        Calculator.playDirectAudioAndReset('fallen.mp3'); 
         if (typeof StoryProgressManager !== 'undefined') {
             StoryProgressManager.markAndScrollToPoint('story_point_penutupan');
         }
-        // Tidak perlu reset State.pemicu123PertamaSudahTerjadi di sini, karena setelah ini mungkin tidak ada pemicu "123" lagi
-        State.calcInputSequence123 = []; // Reset sequence 123
-        return; // Keluar setelah tindakan selesai
+        State.calcInputSequence123 = []; 
+        return; 
     }
 } else if (State.calcInputSequence123.length >= 3) {
-    // Jika sequence sudah 3 digit tapi bukan "123", atau jika belum mencapai 3 digit
-    // dan ada input lain yang tidak membuat jadi "123"
     State.calcInputSequence123.shift();
 }
-                        // Urutan 320 -> beanie.mp3 (TETAP)
                         State.calcInputSequence320.push(value);
                         if (State.calcInputSequence320.join('') === '320') {
                             Calculator.playDirectAudioAndReset('beanie.mp3');
@@ -3210,7 +3040,6 @@ if (State.calcInputSequence123.join('') === '123') {
                             State.calcInputSequence320.shift();
                         }
 
-                        // Urutan 916 -> derpcat.mp3 (TETAP)
                         State.calcInputSequence916.push(value);
                         if (State.calcInputSequence916.join('') === '916') {
                             Calculator.playDirectAudioAndReset('derpcat.mp3');
@@ -3219,7 +3048,6 @@ if (State.calcInputSequence123.join('') === '123') {
                             State.calcInputSequence916.shift();
                         }
 
-                        // Urutan 518 -> forever.mp3 (TETAP)
                         State.calcInputSequence518.push(value);
                         if (State.calcInputSequence518.join('') === '518') {
                             Calculator.playDirectAudioAndReset('forever.mp3');
@@ -3228,24 +3056,14 @@ if (State.calcInputSequence123.join('') === '123') {
                             State.calcInputSequence518.shift();
                         }
 
-                        // Urutan 2010 -> 23.mp3 (DIUBAH)
                         State.calcInputSequence2010.push(value);
                         if (State.calcInputSequence2010.join('') === '2010') {
-                            Calculator.playDirectAudioAndReset('23.mp3'); // Mengganti fallen.mp3 dengan 23.mp3
-                            // State.currentCalcInput = ''; State.previousCalcInput = ''; State.calcOperator = null; // Mungkin sudah dihandle
-                            // Calculator.updateDisplay('');                                                      // oleh playDirectAudioAndReset
-                            // State.calcInputSequence2010 = [];                                                  //
-                            return; // Keluar setelah audio dipicu
-                        } else if (State.calcInputSequence2010.length >= 4) { // Maks panjang 4
+                            Calculator.playDirectAudioAndReset('23.mp3'); 
+                            return; 
+                        } else if (State.calcInputSequence2010.length >= 4) { 
                             State.calcInputSequence2010.shift();
                         }
-                     // Akhir dari 'else if (value !== '.')' untuk sekuens digit
-                    // ===== AKHIR BLOK LOGIKA BARU PENGECEKAN SEQUENCE AUDIO =====
-
-                    // --- AKHIR BAGIAN PENGECEKAN SEQUENCE --- (Ini adalah komentar lama, bisa dihapus jika mau)
-
-                    // Jika tidak ada sequence yang terpicu dan keluar (return),
-                    // maka proses sebagai input digit kalkulator reguler.
+                    
                     if (State.currentCalcInput.includes('.') && value === '.') {
                         return;
                     }
@@ -3273,16 +3091,14 @@ if (State.calcInputSequence123.join('') === '123') {
                         State.calcInputSequence.shift();
                     }
 
-                } else { // Not a digit (operator, C, =, .)
+                } else { 
                     if (value !== '.') {
                         State.calcInputSequence666 = []; State.calcInputSequence777 = [];
                         State.calcInputSequence328 = []; State.calcInputSequence8427 = [];
                         State.calcInputSequence115 = []; State.calcInputSequence2022 = [];
-                        // ===== TAMBAHAN: RESET SEQUENCE AUDIO BARU DI SINI JUGA =====
                         State.calcInputSequence123 = []; State.calcInputSequence320 = [];
                         State.calcInputSequence916 = []; State.calcInputSequence518 = [];
                         State.calcInputSequence2010 = [];   State.calcInputSequence402 = [];
-                        // ===== AKHIR TAMBAHAN RESET =====
                     }
 
                     if (value === '.') {
@@ -3302,7 +3118,7 @@ if (State.calcInputSequence123.join('') === '123') {
                         }
                         State.calcOperator = value;
                         State.currentCalcInput = '';
-                        State.calcInputSequence = []; // Reset untuk NUMBER_TEXT_MAP
+                        State.calcInputSequence = []; 
                     } else if (value === '=') {
                         if (State.currentCalcInput === '' || State.previousCalcInput === '' || !State.calcOperator) return;
                         const result = Calculator.calculate(State.previousCalcInput, State.currentCalcInput, State.calcOperator);
@@ -3315,8 +3131,6 @@ if (State.calcInputSequence123.join('') === '123') {
                         State.currentCalcInput = ''; State.previousCalcInput = ''; State.calcOperator = null;
                         Calculator.updateDisplay('0');
                         State.calcInputSequence = [];
-                        // Reset semua sequence tracker karena 'C' adalah clear all
-                        // (Sudah ditangani oleh if (value !== '.') di atas jika 'C' bukan '.', tapi ini eksplisit)
                         State.calcInputSequence666 = []; State.calcInputSequence777 = [];
                         State.calcInputSequence328 = []; State.calcInputSequence8427 = [];
                         State.calcInputSequence115 = []; State.calcInputSequence2022 = [];
@@ -3329,7 +3143,6 @@ if (State.calcInputSequence123.join('') === '123') {
         };
 
 
-        // --- Music Player Management ---
         const PlayerManager = {
             getPlayerElements: (idPrefix) => {
                 const container = document.getElementById(`music-player-container-${idPrefix}`);
@@ -3587,7 +3400,6 @@ if (State.calcInputSequence123.join('') === '123') {
         };
 
         const SadEffectManager = {
-    rainContainer: null,
     isObserverActive: false,
     observerInstance: null,
 
@@ -3595,84 +3407,39 @@ if (State.calcInputSequence123.join('') === '123') {
         const currentTriggerMeninggalText = document.getElementById('trigger_teks_meninggal');
         const currentTriggerPenutupanSection = document.getElementById('story_point_penutupan');
 
-        if (!Cache.sadEffectOverlay || !currentTriggerMeninggalText || !currentTriggerPenutupanSection) {
-            console.warn("SadEffectManager: Elemen penting (overlay, trigger meninggal, atau trigger penutup) tidak ditemukan saat initEffect. Efek tidak akan aktif atau di-reset.");
+        if (!Cache.body || !currentTriggerMeninggalText || !currentTriggerPenutupanSection) {
+            console.warn("SadEffectManager: Elemen penting (body atau trigger) tidak ditemukan. Efek tidak akan aktif.");
             if (SadEffectManager.observerInstance) {
                 SadEffectManager.observerInstance.disconnect();
-                SadEffectManager.observerInstance = null;
                 SadEffectManager.isObserverActive = false;
-                console.log("SadEffectManager: Observer dihentikan karena elemen target hilang.");
             }
-            if (State.isSadEffectActive) {
-                SadEffectManager.deactivate(true);
+            if (Cache.body && Cache.body.classList.contains('sad-effect-active')) {
+                 SadEffectManager.deactivate();
             }
             return;
         }
 
-        if (!SadEffectManager.rainContainer && Cache.sadEffectOverlay) { // Tambahkan pengecekan Cache.sadEffectOverlay
-            SadEffectManager.rainContainer = document.createElement('div');
-            Object.assign(SadEffectManager.rainContainer.style, {
-                position: 'absolute', top: '0', left: '0',
-                width: '100%', height: '100%', pointerEvents: 'none'
-            });
-            Cache.sadEffectOverlay.appendChild(SadEffectManager.rainContainer);
-        }
-
         if (SadEffectManager.observerInstance) {
             SadEffectManager.observerInstance.disconnect();
-            // console.log("SadEffectManager: Observer lama dihentikan."); // Bisa di-uncomment untuk debug
         }
 
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
-        };
+        const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
 
         const observerCallback = (entries, observer) => {
-            let triggerMeninggalVisible = false;
-            let triggerPenutupanVisible = false;
-            
+            const isTriggerMeninggalVisible = entries.some(e => e.target.id === 'trigger_teks_meninggal' && e.isIntersecting);
+            const isTriggerPenutupanVisible = entries.some(e => e.target.id === 'story_point_penutupan' && e.isIntersecting);
 
-            entries.forEach(entry => {
-                if (entry.target.id === 'trigger_teks_meninggal') {
-                    triggerMeninggalVisible = entry.isIntersecting;
-                   
-                } else if (entry.target.id === 'story_point_penutupan') {
-                    triggerPenutupanVisible = entry.isIntersecting;
+            if (isTriggerPenutupanVisible) {
+                if (Cache.body.classList.contains('sad-effect-active')) {
+                    SadEffectManager.deactivate();
                 }
-            });
-
-            // Pengecekan elemen masih ada di DOM saat callback diproses
-            const freshTriggerMeninggal = document.getElementById('trigger_teks_meninggal');
-            const freshTriggerPenutupan = document.getElementById('story_point_penutupan');
-
-            if (!freshTriggerMeninggal || !freshTriggerPenutupan) {
-                console.warn("SadEffectManager Callback: Elemen target tidak ditemukan lagi di DOM. Menghentikan observer.");
                 observer.disconnect();
-                SadEffectManager.observerInstance = null;
                 SadEffectManager.isObserverActive = false;
-                if (State.isSadEffectActive) SadEffectManager.deactivate(true);
-                return;
-            }
-
-
-            if (triggerPenutupanVisible) {
-                if (State.isSadEffectActive) {
-                    SadEffectManager.deactivate(); // Akan log (Force: false)
-                }
-                // Setelah penutupan terlihat, hentikan semua observasi terkait efek ini
-                console.log("SadEffectManager: Bagian Penutupan terlihat. Menghentikan semua observasi untuk SadEffect.");
-                observer.unobserve(freshTriggerMeninggal);
-                observer.unobserve(freshTriggerPenutupan);
-                SadEffectManager.isObserverActive = false; // Tandai observer tidak lagi aktif
-                                                      // karena tidak mengamati apa-apa lagi.
-                // SadEffectManager.observerInstance = null; // Bisa juga di-null kan observernya
-            } else if (triggerMeninggalVisible) {
-                if (!State.isSadEffectActive) {
+                console.log("SadEffectManager: Penutupan tercapai, observer dihentikan.");
+            } else if (isTriggerMeninggalVisible) {
+                if (!Cache.body.classList.contains('sad-effect-active')) {
                     SadEffectManager.activate();
                 }
-           
             }
         };
 
@@ -3680,88 +3447,24 @@ if (State.calcInputSequence123.join('') === '123') {
         SadEffectManager.observerInstance.observe(currentTriggerMeninggalText);
         SadEffectManager.observerInstance.observe(currentTriggerPenutupanSection);
         SadEffectManager.isObserverActive = true;
-        console.log("SadEffectManager (re)initialized and observing elements.");
-    },
-
-    createRaindrop: () => {
-        if (!SadEffectManager.rainContainer || !State.isSadEffectActive || !Cache.sadEffectOverlay) return;
-
-        const drop = document.createElement('div');
-        drop.classList.add('raindrop');
-        drop.style.left = Math.random() * 100 + 'vw';
-        drop.style.animationDuration = (Math.random() * 1 + 0.5) + 's';
-        drop.style.animationDelay = Math.random() * 0.2 + 's';
-
-        SadEffectManager.rainContainer.appendChild(drop);
-
-        const totalAnimTime = (parseFloat(drop.style.animationDuration) + parseFloat(drop.style.animationDelay)) * 1000;
-        setTimeout(() => {
-            if (drop.parentNode) {
-                drop.remove();
-            }
-        }, totalAnimTime + 200);
+        console.log("SadEffectManager (Background Filter) diinisialisasi.");
     },
 
     activate: () => {
-        if (State.isSadEffectActive || !SadEffectManager.isObserverActive) {
-            if (!SadEffectManager.isObserverActive && Cache.triggerMeninggalText && Cache.triggerPenutupanSection) {
-                 // Jika elemen ada tapi observer belum aktif, mungkin perlu initEffect ulang
-                console.warn("SadEffectManager: Mencoba activate saat observer tidak aktif. Mungkin initEffect perlu dipanggil.");
-            } else if (!Cache.triggerMeninggalText || !Cache.triggerPenutupanSection) {
-                 console.warn("SadEffectManager: Elemen pemicu tidak ada, tidak bisa activate.");
-            }
-            return;
-        }
-        console.log("Activating sad effect...");
-        State.isSadEffectActive = true;
-        if (Cache.sadEffectOverlay) {
-            Cache.sadEffectOverlay.style.display = 'block';
-            setTimeout(() => Cache.sadEffectOverlay.classList.add('active'), 20);
-        } else {
-            console.error("SadEffectManager: Cache.sadEffectOverlay tidak ditemukan saat activate!");
-            State.isSadEffectActive = false;
-            return;
-        }
-
-        if (State.rainIntervalId) clearInterval(State.rainIntervalId);
-        State.rainIntervalId = setInterval(SadEffectManager.createRaindrop, 80);
+        if (!Cache.body || Cache.body.classList.contains('sad-effect-active')) return;
+        
+        console.log("Mengaktifkan efek sedih pada latar belakang...");
+        Cache.body.classList.add('sad-effect-active');
     },
 
-    deactivate: (forceVisualReset = false) => {
-        if (!State.isSadEffectActive && !forceVisualReset) return;
+    deactivate: () => {
+        if (!Cache.body || !Cache.body.classList.contains('sad-effect-active')) return;
         
-        console.log(`Deactivating sad effect... (Force: ${forceVisualReset})`);
-        const wasActive = State.isSadEffectActive; // Catat state sebelum diubah
-        State.isSadEffectActive = false;
-        
-        if (Cache.sadEffectOverlay) {
-            Cache.sadEffectOverlay.classList.remove('active');
-        }
-
-        if (State.rainIntervalId) {
-            clearInterval(State.rainIntervalId);
-            State.rainIntervalId = null;
-        }
-
-        // Hanya lakukan timeout jika efek benar-benar aktif sebelumnya atau dipaksa reset
-        if (wasActive || forceVisualReset) {
-            setTimeout(() => {
-                if (SadEffectManager.rainContainer) {
-                    if (!Cache.sadEffectOverlay || !Cache.sadEffectOverlay.classList.contains('active') || forceVisualReset) {
-                        SadEffectManager.rainContainer.innerHTML = '';
-                    }
-                }
-                if (Cache.sadEffectOverlay) {
-                    if (!Cache.sadEffectOverlay.classList.contains('active') || forceVisualReset) {
-                        Cache.sadEffectOverlay.style.display = 'none';
-                    }
-                }
-            }, 2100); // Durasi transisi CSS opacity
-        }
+        console.log(`Menonaktifkan efek sedih pada latar belakang...`);
+        Cache.body.classList.remove('sad-effect-active');
     }
 };
 
-        // --- YouTube Player ---
         const YouTubePlayer = {
             isAPIReady: false,
             activeVideoId: null, 
@@ -3775,14 +3478,13 @@ if (State.calcInputSequence123.join('') === '123') {
                     }
                 };
             },
-            // MODIFIED: showVideoById to accept videoId and withAudio flag
             showVideoById: (videoId, withAudio = false) => {
                 YouTubePlayer.activeVideoId = videoId;
                 YouTubePlayer.shouldHaveAudio = withAudio;
 
                 if (Cache.youtubeVideoOverlay) {
                     Cache.youtubeVideoOverlay.style.display = 'flex';
-                    Cache.body.classList.add('youtube-video-active'); // Disable interaction on other elements
+                    Cache.body.classList.add('youtube-video-active'); 
 
                     if (!YouTubePlayer.isAPIReady || typeof YT === 'undefined' || typeof YT.Player === 'undefined') {
                          console.warn("YouTube API not ready, deferring player creation.");
@@ -3791,7 +3493,6 @@ if (State.calcInputSequence123.join('') === '123') {
                     YouTubePlayer.createPlayer(videoId, withAudio);
                 }
             },
-            // MODIFIED: createPlayer to accept videoId and withAudio flag
             createPlayer: (videoId, withAudio = false) => {
                 if (Cache.youtubeVideoOverlay.style.display === 'none' || Cache.youtubeVideoOverlay.style.display === '') return;
                 
@@ -3811,12 +3512,11 @@ if (State.calcInputSequence123.join('') === '123') {
                         'modestbranding': 1, 'iv_load_policy': 3, 'fs': 0, 'playsinline': 1 
                     },
                     events: {
-                        'onReady': (event) => YouTubePlayer.onPlayerReady(event, withAudio), // Pass audio flag
+                        'onReady': (event) => YouTubePlayer.onPlayerReady(event, withAudio), 
                         'onStateChange': YouTubePlayer.onPlayerStateChange
                     }
                 });
             },
-            // MODIFIED: onPlayerReady to handle audio
             onPlayerReady: (event, withAudio) => {
                 event.target.playVideo();
                 if (withAudio) {
@@ -3835,7 +3535,6 @@ if (State.calcInputSequence123.join('') === '123') {
                     State.youtubePlayer.playVideo();
                 }
             },
-            // Not used as user wants to be stuck, but good to have for future
             
             hideVideo: () => {
                 if (Cache.youtubeVideoOverlay) {
@@ -3866,7 +3565,7 @@ if (State.calcInputSequence123.join('') === '123') {
                 } else if (videoSrc === 'veo3.mp4') {
                     triggerToCheck = State.is402TriggerEnabled;
                 } else {
-                    triggerToCheck = true; // Untuk video lain yang mungkin ditambahkan tanpa trigger khusus
+                    triggerToCheck = true; 
                 }
 
                 if (!Cache.localVideoOverlay || !Cache.localVideoPlayerElement || !triggerToCheck) return;
@@ -3877,14 +3576,12 @@ if (State.calcInputSequence123.join('') === '123') {
                 Cache.localVideoPlayerElement.play()
                     .then(() => {
                          Cache.body.classList.add('local-video-active');
-                         // Listener untuk klik di mana saja untuk menutup video
                          document.addEventListener('click', LocalVideoManager.handleDocumentClickToHide, { once: true, capture: true });
-                         // Listener untuk tombol Escape
                          document.addEventListener('keydown', LocalVideoManager.handleEscapeKeyToHide, { once: true });
                     })
                     .catch(e => {
                         console.error("Error playing local video:", e);
-                        Cache.localVideoOverlay.style.display = 'none'; // Sembunyikan jika gagal play
+                        Cache.localVideoOverlay.style.display = 'none'; 
                     });
             },
 
@@ -3895,19 +3592,18 @@ if (State.calcInputSequence123.join('') === '123') {
 
                 Cache.localVideoOverlay.style.display = 'none';
                 Cache.localVideoPlayerElement.pause();
-                const closedVideoSrc = Cache.localVideoPlayerElement.src; // Ambil src SEBELUM dikosongkan
+                const closedVideoSrc = Cache.localVideoPlayerElement.src; 
                 Cache.localVideoPlayerElement.src = ''; 
 
-                // Nonaktifkan trigger yang sesuai berdasarkan video yang baru saja ditutup
                 if (State.currentLocalVideoSrc === 'secretvideo.mp4' && State.is328TriggerEnabled) {
                     State.is328TriggerEnabled = false; 
                     console.log("Pemicu video '328' (secretvideo.mp4) telah dinonaktifkan permanen.");
-                } else if (State.currentLocalVideoSrc === 'veo3.mp4' && State.is402TriggerEnabled) { // << BARU/MODIFIKASI
+                } else if (State.currentLocalVideoSrc === 'veo3.mp4' && State.is402TriggerEnabled) { 
                     State.is402TriggerEnabled = false; 
                     console.log("Pemicu video '402' (veo3.mp4) telah dinonaktifkan permanen.");
                 }
                 
-                State.currentLocalVideoSrc = null; // << BARU: Reset video yang sedang aktif
+                State.currentLocalVideoSrc = null; 
 
                 Cache.body.classList.remove('local-video-active');
                 document.removeEventListener('click', LocalVideoManager.handleDocumentClickToHide, { capture: true });
@@ -3915,13 +3611,6 @@ if (State.calcInputSequence123.join('') === '123') {
             },
 
             handleDocumentClickToHide: (event) => {
-                // Jika klik berasal dari dalam kontrol video, jangan langsung tutup.
-                // Ini adalah penyederhanaan, karena mendeteksi klik pada native controls bisa rumit.
-                // Untuk kasus "klik apapun", kita bisa langsung memanggil hidePlayer.
-                // if (Cache.localVideoPlayerElement.contains(event.target)) {
-                //    document.addEventListener('click', LocalVideoManager.handleDocumentClickToHide, { once: true, capture: true });
-                //    return;
-                // }
                 LocalVideoManager.hidePlayer();
             },
 
@@ -3929,13 +3618,11 @@ if (State.calcInputSequence123.join('') === '123') {
                 if (event.key === 'Escape') {
                     LocalVideoManager.hidePlayer();
                 } else {
-                    // Jika bukan Escape, pasang lagi listener untuk keydown berikutnya
                     document.addEventListener('keydown', LocalVideoManager.handleEscapeKeyToHide, { once: true });
                 }
             }
         };
 
-        // --- Calendar Manager ---
         const CalendarManager = {
             init: () => {
                 if (Cache.calendarToggleButton) {
@@ -3948,7 +3635,6 @@ if (State.calcInputSequence123.join('') === '123') {
                     Cache.calendarHeaderNextBtn.addEventListener('click', () => CalendarManager.changeMonth(1));
                 }
                 CalendarManager.renderCalendar();
-                // Sembunyikan jika klik di luar kalender (jika terlihat)
                 document.addEventListener('click', (event) => {
                     if (State.isCalendarVisible && Cache.calendarPopup && !Cache.calendarPopup.contains(event.target) && !Cache.calendarToggleButton.contains(event.target)) {
                         CalendarManager.hideCalendar();
@@ -3959,11 +3645,10 @@ if (State.calcInputSequence123.join('') === '123') {
             toggleCalendar: () => {
                 State.isCalendarVisible = !State.isCalendarVisible;
                 if (State.isCalendarVisible) {
-                    Cache.calendarPopup.style.display = 'flex'; // atau block
-                    // force reflow
+                    Cache.calendarPopup.style.display = 'flex'; 
                     void Cache.calendarPopup.offsetWidth;
                     Cache.calendarPopup.classList.add('visible');
-                    CalendarManager.renderCalendar(); // Render ulang saat buka
+                    CalendarManager.renderCalendar(); 
                 } else {
                     CalendarManager.hideCalendar();
                 }
@@ -3972,26 +3657,25 @@ if (State.calcInputSequence123.join('') === '123') {
             hideCalendar: () => {
                 if (Cache.calendarPopup) {
                     Cache.calendarPopup.classList.remove('visible');
-                    // Biarkan transisi opacity selesai sebelum display none
                     setTimeout(() => {
                          if (!State.isCalendarVisible) Cache.calendarPopup.style.display = 'none';
-                    }, 300); // Sama dengan durasi transisi
+                    }, 300); 
                 }
                 State.isCalendarVisible = false;
-                 if(Cache.calendarMessageDisplay) Cache.calendarMessageDisplay.textContent = ''; // Bersihkan pesan saat ditutup
+                 if(Cache.calendarMessageDisplay) Cache.calendarMessageDisplay.textContent = ''; 
             },
 
             renderCalendar: () => {
                 if (!Cache.calendarDaysContainer || !Cache.calendarMonthYearText) return;
 
-                Cache.calendarDaysContainer.innerHTML = ''; // Clear previous days
+                Cache.calendarDaysContainer.innerHTML = ''; 
 
                 const year = State.currentCalendarDate.getFullYear();
-                const month = State.currentCalendarDate.getMonth(); // 0-11
+                const month = State.currentCalendarDate.getMonth(); 
 
                 Cache.calendarMonthYearText.textContent = `${State.currentCalendarDate.toLocaleString('id-ID', { month: 'long' })} ${year}`;
 
-                const firstDayOfMonth = new Date(year, month, 1).getDay(); // 0 (Minggu) - 6 (Sabtu)
+                const firstDayOfMonth = new Date(year, month, 1).getDay(); 
                 const daysInMonth = new Date(year, month + 1, 0).getDate();
                 
                 const dayAbbreviations = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'];
@@ -4002,20 +3686,18 @@ if (State.calcInputSequence123.join('') === '123') {
                     Cache.calendarDaysContainer.appendChild(dayHeaderEl);
                 });
 
-                // Add empty cells for days before the first of the month
                 for (let i = 0; i < firstDayOfMonth; i++) {
                     const emptyCell = document.createElement('div');
                     emptyCell.classList.add('empty');
                     Cache.calendarDaysContainer.appendChild(emptyCell);
                 }
 
-                // Add day cells
                 const today = new Date();
                 for (let day = 1; day <= daysInMonth; day++) {
                     const dayCell = document.createElement('div');
                     dayCell.textContent = day;
                     dayCell.dataset.day = day;
-                    dayCell.dataset.month = month; // bulan (0-11)
+                    dayCell.dataset.month = month; 
                     dayCell.dataset.year = year;
 
                     if (year === today.getFullYear() && month === today.getMonth() && day === today.getDate()) {
@@ -4030,7 +3712,7 @@ if (State.calcInputSequence123.join('') === '123') {
             changeMonth: (offset) => {
                 State.currentCalendarDate.setMonth(State.currentCalendarDate.getMonth() + offset);
                 CalendarManager.renderCalendar();
-                 if(Cache.calendarMessageDisplay) Cache.calendarMessageDisplay.textContent = ''; // Bersihkan pesan saat ganti bulan
+                 if(Cache.calendarMessageDisplay) Cache.calendarMessageDisplay.textContent = ''; 
             },
 
             displayCalendarMessage: (message) => {
@@ -4042,100 +3724,91 @@ if (State.calcInputSequence123.join('') === '123') {
                 }
                 State.calendarMessageTimeoutId = setTimeout(() => {
                     Cache.calendarMessageDisplay.textContent = '';
-                }, 5000); // Pesan hilang setelah 5 detik
+                }, 5000); 
             },
 
             handleDayClick: (event) => {
                 const day = parseInt(event.target.dataset.day);
-                const month = parseInt(event.target.dataset.month); // bulan (0-11)
+                const month = parseInt(event.target.dataset.month); 
                 const year = parseInt(event.target.dataset.year);
                 
-                // Tandai tanggal yang diklik
                 document.querySelectorAll('#calendar-days div.selected').forEach(el => el.classList.remove('selected'));
                 event.target.classList.add('selected');
 
-                // Pemicu spesifik tanggal
-                // Ingat bulan di JS adalah 0-indexed (Jan=0, Feb=1, Mar=2, Apr=3, ..., Dec=11)
-                
-                // 28 Maret
-                if (day === 28 && month === 2) { // 28 Maret
+                if (day === 28 && month === 2) { 
                     CalendarManager.displayCalendarMessage("Mengarahkan...");
                     setTimeout(() => { window.open('https://codei81224.vercel.app/', '_blank'); }, 1000);
                 } 
-                else if (day === 8 && month === 11) { // 8 Desember
+                else if (day === 8 && month === 11) { 
                     CalendarManager.displayCalendarMessage("Timernya belum abis awokawok 😎");
                 } 
-                else if (day === 15 && month === 1) { // 15 Februari
+                else if (day === 15 && month === 1) { 
                     CalendarManager.displayCalendarMessage("🎂 Selamat ulang tahun, semoga harimu secerah senyumnya!");
                 }
-                else if (day === 16 && month === 1) { // 16 Februari
+                else if (day === 16 && month === 1) { 
                      CalendarManager.displayCalendarMessage("Selamat ulang tahun di alam sana... doa terbaik selalu menyertai. 🙏");
                 }
-                else if (day === 11 && month === 11) { // 11 Desember
+                else if (day === 11 && month === 11) { 
                     CalendarManager.displayCalendarMessage("Wih, belum mokad juga? 🤔 Panjang umur, ya!");
                 }
-                else if (day === 28 && month === 3) { // 28 April
+                else if (day === 28 && month === 3) { 
                      CalendarManager.displayCalendarMessage("Fakta terungkap: Netizen Indonesia... ah sudahlah, mereka adalah sekumpulan orang bodoh! 🎉");
                 }
-                else if (day === 29 && month === 1) { // 29 Februari
+                else if (day === 29 && month === 1) { 
                      CalendarManager.displayCalendarMessage("CODEI 81224 TELAH LAHIR DI DUNIA FANA INI! 🥳");
                 }
-                // --- TAMBAHAN BARU ---
-                else if (day === 28 && month === 7) { // 28 Agustus (Agustus adalah bulan ke-7)
+                else if (day === 28 && month === 7) { 
                     CalendarManager.displayCalendarMessage("Chat terakhirku bersamanya...");
                 }
-                else if (day === 28 && month === 4) { // 28 Mei (Mei adalah bulan ke-4)
+                else if (day === 28 && month === 4) { 
                     CalendarManager.displayCalendarMessage("Mimpi yang mengingatkanku tentang ia...");
                 }
-                else if (day === 1 && month === 8) { // 1 September (September adalah bulan ke-8)
+                else if (day === 1 && month === 8) { 
                     CalendarManager.displayCalendarMessage("Rumah baru dengan kehidupan baru. Menjauhlah anak kucai!");
                 }
-                else if (day === 16 && month === 2) { // 16 Maret (Maret adalah bulan ke-2)
+                else if (day === 16 && month === 2) { 
                     CalendarManager.displayCalendarMessage("Tanggal yang dianggap sial.");
                 }
-                else if (day === 3 && month === 5) { // 3 Juni (Juni adalah bulan ke-5)
+                else if (day === 3 && month === 5) { 
                     CalendarManager.displayCalendarMessage("Kode yang pas untuk membuka dekripsi!");
                 }
-                else if (day === 17 && month === 7) { // 17 Agustus
+                else if (day === 17 && month === 7) { 
                     CalendarManager.displayCalendarMessage("Disinilah merdekanya SDM Rendah tujuh generasi");
                 }
-                else if (day === 12 && month === 7) { // 12 Agustus
+                else if (day === 12 && month === 7) { 
                     const longMessage = `QmFueWFrIHNla2FsaSBsdWthIHlhbmcgdGVsYWgga3VqYWxhbmkgc2VuZGlyaSwgZGFsYW0gZGlhbS4gQXBhIHNlYmVuYXJueWEgdHVqdWFuIG1lcmVrYSBtZW1iZW5jaT8gQXBha2FoIG1lcmVrYSBtZXJhc2EgcHVhcyBzZXRlbGFoIG1lbmdoYW5jdXJrYW4gc2VzZW9yYW5nPyBBa3UgcmFzYSB0aWRhay4gTWVyZWthIGhhbnlhIGluZ2luIG1lbGloYXQgZGlyaW55YSBwZXJsYWhhbiBwYWRhbSwgc2VwZXJ0aSBsaWxpbiBkaSB0ZW5nYWggYmFkYWkuCgpLZW5hcGEgc2VtdWEgaW5pIHRhayBwZXJuYWggdXNhaT8gU2VsYW1hIGhpZHVwbnlhLCBpYSBzZWxhbHUgcGVyY2F5YSBwYWRhIGNhaGF5YSBrZWNpbCBkaSBkZXBhbiBtYXRhbnlhLCBtZXNraSBpdHUgaGFueWEgaWx1c2kuIE1lbmdhcGEgbWVyZWthIGJlZ2l0dSBtZW1iZW5jaSBkYW4gbWVyYXNhIHRlcmFuY2FtIG9sZWhueWE/IFBhZGFoYWwsIGlhIGFkYWxhaCBqaXdhIHlhbmcgcGFsaW5nIHR1bHVzIHlhbmcgcGVybmFoIGt1dGVtdWksIG1hbXB1IG1lbnllbnR1aCBwZXJhc2FhbiBoYW55YSBkZW5nYW4gaGFkaXJueWEuCgpMYWx1LCBzZXRlbGFoIHNlbXVhIGluaSB0ZXJqYWRpLCBhcGEgeWFuZyB0ZXJzaXNhPyBCYWdhaW1hbmEgYWt1IGJpc2EgYmVybmFwYXMgdGFucGEgZGlyaW55YT8gRGluZ2luLCBzZXBlcnRpIHRhbmFoIG1ha2FtIHlhbmcgYmFydSBkaWdhbGkuIFNlcGVydGkgYXBhIHJhc2FueWE/IFNlcGVydGkgaGFsYW1hbiBraXRhYiBzdWNpIHlhbmcgaGFuZ3VzIGRhbiBtZW5naGl0YW0sIGRpYmFrYXIgYXBpLgoKU2lhLXNpYSBzZWdhbGFueWEuIFByb3llayB5YW5nIGt1YmFuZ3VuIGRhcmkgaGFyYXBhbi4gSGFkaWFoIHlhbmcga3VzaWFwa2FuIGRpYW0tZGlhbS4gUGVzYW4ga2VoaWR1cGFuIHlhbmcga2luaSB0ZXJrdWJ1ciB0YW5wYSBtYWtuYS4gTWVyZWthIGxpaGFpIG1lbXV0YXJiYWxpa2thbiBzZWdhbGFueWEsIHNlZGFuZ2thbiBrYW1pLCB5YW5nIHRhayBwdW55YSBrdWFzYSBhcGEgcHVuLCBoYW55YSBiaXNhIGRpaGluYSBkYW4gZGlsdXBha2FuLgoKTWFhZmthbiBha3Uga2FyZW5hIHRlbGFoIGdhZ2FsIGRhbGFtIHNlZ2FsYW55YS4gR2FnYWwgbWVuamFkaSBwZWxpbmR1bmcuIEdhZ2FsIG1lbmphZGkgdGVtYW4uIEdhZ2FsIG1lbmphZGkgYWxhc2FuIHVudHVrIGlhIHRldGFwIHRpbmdnYWwuIE11bmdraW4sIHR1anVoIHRhaHVuIGJlcnNhbWFueWEgY3VrdXAgbWVuamFkaSBiYWIgdGVyc2VkaWggZGFsYW0gbWFzYSBrZWNpbGt1LCBhdGF1IHJlbWFqYWt1LiBBa3Ugc2VuZGlyaSB0YWsgdGFodS4gWWFuZyBqZWxhcywgcGVyY2ludGFhbiBpdHUgYmFuZ3NhdCwgZGFuIGFrdSBiZW5hci1iZW5hciBtZW55ZXNhbC4=`;
                     CalendarManager.displayCalendarMessage(longMessage);
                 }
-                else if (day === 30 && month === 10) { // 30 November (November adalah bulan ke-10)
+                else if (day === 30 && month === 10) { 
                      CalendarManager.displayCalendarMessage("Mimpi kedua tentangnya...");
                 }
-                else if (day === 11 && month === 4) { // 11 Mei
+                else if (day === 11 && month === 4) { 
                     CalendarManager.displayCalendarMessage("Urutan kalkulator yang membuka sesuatu...");
                 }
-                else if (day === 20 && month === 3) { // konto! Mei
+                else if (day === 20 && month === 3) { 
                     CalendarManager.displayCalendarMessage("Ditelfon orang goblok");
                 }
-                else if (day === 2 && month === 4) { // 11 Mei
+                else if (day === 2 && month === 4) { 
                     CalendarManager.displayCalendarMessage("Sigma cukurukuk anjay");
                 }
-                // --- AKHIR TAMBAHAN BARU ---
                 else {
                     if (Cache.calendarMessageDisplay) Cache.calendarMessageDisplay.textContent = '';
                 }
             }
         };
 
-        const SecretManager = { // Ini adalah SecretManager Anda yang sudah ada
+        const SecretManager = { 
         handleTrigger:e=>{if(SECRET_SONG_TRIGGERS[e]){SECRET_SONG_TRIGGERS[e].count++;for(const t in SECRET_SONG_TRIGGERS)t!==e&&(SECRET_SONG_TRIGGERS[t].count=0);State.calcMultiplyClicks=0;State.calcDivideClicks=0;SECRET_SONG_TRIGGERS[e].count>=SECRET_SONG_TRIGGERS[e].threshold&&(PlayerManager.playSecretSong(SECRET_SONG_TRIGGERS[e].song),SECRET_SONG_TRIGGERS[e].count=0)}}
     };
 
-    // === Logika Game Puzzle Memori (Dimasukkan di sini agar semua objek lain terdefinisi) ===
     const GameMemori = {
         init: () => {
             if (!Cache.lapisanGameMemori || !Cache.gridGameMemori) {
                  console.error("Elemen penting untuk game memori tidak ditemukan. Melewati game.");
-                 GameMemori.lanjutkanKeCerita(true); // true menandakan untuk memaksa lanjut
+                 GameMemori.lanjutkanKeCerita(true); 
                  return;
             }
 
-            // Pindahkan cache elemen game ke sini agar pasti setelah DOM dimuat
             Cache.lapisanGameMemori = document.getElementById('game-memori-overlay');
             Cache.containerGameMemori = document.getElementById('game-memori-container');
             Cache.judulGameMemori = document.getElementById('judul-game-memori');
@@ -4147,7 +3820,6 @@ if (State.calcInputSequence123.join('') === '123') {
             Cache.areaPapanGameMemori = document.getElementById('area-papan-game-memori');
             Cache.pesanMenangGameMemori = document.getElementById('pesan-menang-game-memori');
 
-            // Jika ada elemen cache yang masih null setelah ini, ada masalah dengan HTML game.
             if (!Cache.lapisanGameMemori || !Cache.gridGameMemori) {
                 console.error("Elemen inti game masih tidak ditemukan setelah upaya caching ulang. Memaksa lanjut.");
                 GameMemori.lanjutkanKeCerita(true);
@@ -4172,16 +3844,14 @@ if (State.calcInputSequence123.join('') === '123') {
             if (localStorage.getItem('gameMemoriDimenangkan') === 'true') {
                 const waktuMenangSaatIni = localStorage.getItem('waktuMenangGameMemori');
     if (waktuMenangSaatIni && (Date.now() - parseInt(waktuMenangSaatIni)) < SATU_JAM_DALAM_MILIDETIK) {
-        GameMemori.lanjutkanKeCerita(); // Jika masih dalam 1 jam sejak menang, langsung ke cerita
+        GameMemori.lanjutkanKeCerita(); 
         return;
     }
             }
             
-            // Sembunyikan Intro Section saat game dimulai
             if(Cache.introSection) {
-                 Cache.introSection.style.opacity = '0'; // Mulai transisi keluar untuk intro
-                 Cache.introSection.style.pointerEvents = 'none'; // Matikan interaksi intro
-                 // Tambahkan kelas jika ada styling lain untuk is-exiting
+                 Cache.introSection.style.opacity = '0'; 
+                 Cache.introSection.style.pointerEvents = 'none'; 
                  Cache.introSection.classList.add('is-exiting'); 
             }
 
@@ -4220,7 +3890,6 @@ if (State.calcInputSequence123.join('') === '123') {
                     if (Cache.judulGameMemori) Cache.judulGameMemori.style.color = getComputedStyle(document.documentElement).getPropertyValue('--heading-color-light');
                  }
             }
-             // Pastikan font pada game container selalu Cal Sans
             if (Cache.containerGameMemori) {
                 Cache.containerGameMemori.style.fontFamily = "var(--font-primary)";
                 const allTextElements = Cache.containerGameMemori.querySelectorAll('h2, h3, p, span');
@@ -4250,8 +3919,7 @@ if (State.calcInputSequence123.join('') === '123') {
                 const img = document.createElement('img');
                 img.src = sumberGambar; 
                 img.alt = "Gambar Kartu Memori";
-                // Jika gambar tidak muncul, cek path dan pastikan gambar ada.
-                img.onerror = () => { // Tambahkan error handler untuk debug
+                img.onerror = () => { 
                     console.error("Gagal memuat gambar kartu:", sumberGambar);
                     mukaKartuDepan.innerHTML = `<span style="font-size:0.8rem; color:red;">Gagal<br>Load<br>${sumberGambar.split('/').pop()}</span>`;
                 };
@@ -4328,7 +3996,7 @@ if (State.calcInputSequence123.join('') === '123') {
             if (pasanganCocokGameMemori === TOTAL_PASANGAN_GAME_MEMORI) {
                 GameMemori.menangkanGame();
                 localStorage.setItem('gameMemoriDimenangkan', 'true');
-localStorage.setItem('waktuMenangGameMemori', Date.now().toString()); // BARIS BARU: Simpan waktu kemenangan
+localStorage.setItem('waktuMenangGameMemori', Date.now().toString()); 
 localStorage.removeItem('jumlahKesalahanGameMemori');
             }
         },
@@ -4379,15 +4047,14 @@ localStorage.removeItem('jumlahKesalahanGameMemori');
 
             const waktuAkhirKunci = Date.now() + DURASI_KUNCI_GAME_MEMORI;
             localStorage.setItem('waktuAkhirKunciGameMemori', waktuAkhirKunci);
-            localStorage.removeItem('jumlahKesalahanGameMemori'); // Reset kesalahan karena sudah kalah & dikunci
+            localStorage.removeItem('jumlahKesalahanGameMemori'); 
             
             daftarKartuGameMemoriElemen.forEach(kartu => kartu.classList.remove('sedang-terbuka'));
             GameMemori.tampilkanLayarKunci(waktuAkhirKunci);
         },
 
         tampilkanLayarKunci: (waktuAkhir) => {
-            if (!Cache.lapisanGameMemori) return; // Elemen utama belum ada
-             // Pindahkan inisialisasi Cache Game ke sini juga jika belum
+            if (!Cache.lapisanGameMemori) return; 
             if (!Cache.containerGameMemori) {
                 Cache.lapisanGameMemori = document.getElementById('game-memori-overlay');
                 Cache.containerGameMemori = document.getElementById('game-memori-container');
@@ -4421,13 +4088,6 @@ localStorage.removeItem('jumlahKesalahanGameMemori');
                     if(Cache.tampilanTimerKunciGameMemori) Cache.tampilanTimerKunciGameMemori.textContent = "Waktu habis. Muat ulang halaman & klik lanjutkan.";
                     localStorage.removeItem('waktuAkhirKunciGameMemori');
                     
-                    // Jangan otomatis sembunyikan, biarkan pengguna muat ulang & klik lanjutkan.
-                    // setTimeout(() => {
-                    //     if ((gameMemoriAktif || Cache.layarKunciGameMemori.style.display === 'block') && Cache.lapisanGameMemori) {
-                    //          Cache.lapisanGameMemori.style.display = 'none'; 
-                    //          Cache.body.classList.remove('game-memori-aktif');
-                    //     }
-                    // }, 2000);
                     if (intervalTimerKunciGameMemori) clearInterval(intervalTimerKunciGameMemori); 
                     return;
                 }
@@ -4459,14 +4119,11 @@ localStorage.removeItem('jumlahKesalahanGameMemori');
                      Cache.introSection.classList.add('is-exiting');
                 }
                 
-                // Pastikan event listener hanya ditambahkan sekali
                 const handleTransitionOnce = (event) => {
                      if (event.target === Cache.introSection && event.propertyName === 'opacity') {
                         if(Cache.introSection) Cache.introSection.style.display = 'none'; 
-                        // Hapus listener setelah selesai agar tidak terpicu lagi jika ada transisi lain
                         if(Cache.introSection) Cache.introSection.removeEventListener('transitionend', handleTransitionOnce);
                         
-                        // Lanjutkan ke konten utama
                         if (Cache.mainContent) {
                             Cache.mainContent.style.display = 'block'; 
                             Cache.mainContent.classList.add('is-entering');
@@ -4476,14 +4133,14 @@ localStorage.removeItem('jumlahKesalahanGameMemori');
             } else {
                 console.error("SadEffectManager tidak terdefinisi saat mencoba inisialisasi dari GameMemori.");
             }
-        }, 100); // Penundaan singkat cukup
+        }, 100); 
                             if (typeof StoryProgressManager !== 'undefined') {
     StoryProgressManager.loadLastReachedPoint();
 }
                            
                             if (typeof UIManager !== 'undefined' && UIManager.setWidgetVisibility) {
                                  UIManager.setWidgetVisibility(true); 
-                                 UIManager.applyCurrentDarkModeStyles(); 
+                               
                             }
                            
                             if (typeof SecretMessageManager !== 'undefined' && SecretMessageManager.startLoop) {
@@ -4497,26 +4154,21 @@ localStorage.removeItem('jumlahKesalahanGameMemori');
                      }
                 };
 
-                // Periksa apakah transisi sudah ditambahkan sebelumnya. Jika iya, jangan tambahkan lagi.
-                // Ini pendekatan sederhana, cara yang lebih robust adalah dengan flag.
                 let hasTransitionListener = Cache.introSection._hasTransitionListenerForGame;
                 if (!hasTransitionListener) {
                     Cache.introSection.addEventListener('transitionend', handleTransitionOnce);
-                    Cache.introSection._hasTransitionListenerForGame = true; // Tandai bahwa listener sudah ditambahkan
+                    Cache.introSection._hasTransitionListenerForGame = true; 
                 }
                 
-                // Fallback jika transisi tidak terpicu atau opacity sudah 0 (misal setelah reload saat game menang)
-                // setTimeout ini penting agar class is-exiting sempat diterapkan.
                 setTimeout(() => {
                     if (Cache.introSection && (getComputedStyle(Cache.introSection).opacity === "0" || Cache.introSection.style.display === 'none')) {
-                        // Jika listener belum sempat dieksekusi dan opacity sudah 0, panggil manual
                         if (Cache.introSection._hasTransitionListenerForGame) {
                            if(Cache.introSection) Cache.introSection.removeEventListener('transitionend', handleTransitionOnce);
-                           Cache.introSection._hasTransitionListenerForGame = false; // Reset flag
+                           Cache.introSection._hasTransitionListenerForGame = false; 
                         }
-                        handleTransitionOnce({ target: Cache.introSection, propertyName: 'opacity' }); // Simulasikan event
+                        handleTransitionOnce({ target: Cache.introSection, propertyName: 'opacity' }); 
                     }
-                }, 1100); // Sedikit lebih lama dari durasi transisi opacity
+                }, 1100); 
 
             } else {
                 console.warn("#intro section tidak ditemukan, melanjutkan langsung jika memungkinkan.");
@@ -4539,11 +4191,9 @@ localStorage.removeItem('jumlahKesalahanGameMemori');
 
 
 
-        // --- Secret Triggers Management ---
         const setupEventListeners = () => {
         if (Cache.startStoryButton) {
             Cache.startStoryButton.addEventListener('click', () => {
-                // Selalu panggil GameMemori.init() saat tombol Lanjutkan dari intro diklik
                 if (typeof GameMemori !== 'undefined' && GameMemori.init) {
                     GameMemori.init();
                 } else {
@@ -4642,14 +4292,12 @@ localStorage.removeItem('jumlahKesalahanGameMemori');
             }
         } catch (e) {
             console.warn("Tidak dapat mengakses localStorage untuk cek kunjungan pertama:", e);
-            // Anggap saja bukan kunjungan pertama jika error, agar tidak mereset terus-menerus
             adalahKunjunganPertama = false;
         }
 
         if (adalahKunjunganPertama) {
             console.log("Kunjungan pertama terdeteksi. Mereset semua localStorage yang relevan.");
             try {
-                // Hapus semua kunci localStorage yang digunakan website ini
                 localStorage.removeItem('darkMode');
                 localStorage.removeItem('gameMemoriDimenangkan');
                 localStorage.removeItem('waktuMenangGameMemori');
@@ -4658,9 +4306,7 @@ localStorage.removeItem('jumlahKesalahanGameMemori');
                 localStorage.removeItem('adzanSitusJumlahKunjungan');
                 localStorage.removeItem('adzanSitusPesanKunjunganDitampilkan');
                 localStorage.removeItem('ceritaAdzanTerakhirDicapai');
-                // TAMBAHKAN kunci lain jika ada yang kamu pakai di localStorage
-
-                // Setelah bersih-bersih, tandai bahwa pengguna sudah pernah berkunjung
+                
                 localStorage.setItem(KUNCI_PENANDA_KUNJUNGAN_PERTAMA, 'sudah');
                 console.log("Reset localStorage selesai, penanda kunjungan pertama telah dibuat.");
             } catch (e) {
@@ -4668,7 +4314,6 @@ localStorage.removeItem('jumlahKesalahanGameMemori');
             }
         }
     
-        // Inisialisasi Cache elemen game di sini, karena elemen game ditambahkan di akhir body
         Cache.lapisanGameMemori = document.getElementById('game-memori-overlay');
         Cache.containerGameMemori = document.getElementById('game-memori-container');
         Cache.judulGameMemori = document.getElementById('judul-game-memori');
@@ -4691,7 +4336,7 @@ localStorage.removeItem('jumlahKesalahanGameMemori');
             console.log("Game memori: Lebih dari 1 jam telah berlalu sejak kemenangan terakhir. Status kemenangan direset.");
             localStorage.removeItem('gameMemoriDimenangkan');
             localStorage.removeItem('waktuMenangGameMemori');
-            gameTelahDimenangkanSebelumnya = false; // Update status untuk digunakan dalam logika di bawah
+            gameTelahDimenangkanSebelumnya = false; 
         }
     }
 
@@ -4709,7 +4354,7 @@ localStorage.removeItem('jumlahKesalahanGameMemori');
         }
 
         const KUNCI_JUMLAH_KUNJUNGAN = 'adzanSitusJumlahKunjungan';
-    const KUNCI_PESAN_KUNJUNGAN_DITAMPILKAN = 'adzanSitusPesanKunjunganDitampilkan'; // Untuk melacak pesan per kunjungan
+    const KUNCI_PESAN_KUNJUNGAN_DITAMPILKAN = 'adzanSitusPesanKunjunganDitampilkan'; 
     let jumlahKunjungan = 0;
     let sudahTampilkanPesanKunjunganIni = false;
 
@@ -4720,24 +4365,18 @@ localStorage.removeItem('jumlahKesalahanGameMemori');
         console.warn("Gagal mengakses localStorage untuk jumlah kunjungan:", e);
     }
 
-    // Hanya tingkatkan jumlah kunjungan jika pesan untuk kunjungan ini BELUM ditampilkan
-    // Ini mencegah jumlahKunjungan bertambah berkali-kali jika pengguna reload halaman di kunjungan yang sama
     if (!sudahTampilkanPesanKunjunganIni) {
         jumlahKunjungan++;
         try {
             localStorage.setItem(KUNCI_JUMLAH_KUNJUNGAN, jumlahKunjungan.toString());
-            localStorage.setItem(KUNCI_PESAN_KUNJUNGAN_DITAMPILKAN, 'true'); // Tandai pesan untuk kunjungan ini sudah akan ditampilkan
+            localStorage.setItem(KUNCI_PESAN_KUNJUNGAN_DITAMPILKAN, 'true'); 
         } catch (e) {
             console.warn("Gagal menyimpan jumlah kunjungan ke localStorage:", e);
         }
     }
 
-    // Reset flag 'sudahTampilkanPesanKunjunganIni' saat sesi baru dimulai
-    // Ini cara sederhana. Cara lebih robust bisa pakai sessionStorage atau cek timestamp
     window.addEventListener('beforeunload', () => {
         try {
-            // Saat pengguna akan meninggalkan halaman/menutup tab,
-            // kita anggap kunjungan berikutnya adalah kunjungan baru.
             localStorage.removeItem(KUNCI_PESAN_KUNJUNGAN_DITAMPILKAN);
         } catch (e) {
             console.warn("Gagal mereset flag pesan kunjungan di localStorage:", e);
@@ -4757,52 +4396,32 @@ localStorage.removeItem('jumlahKesalahanGameMemori');
         pesanKunjungan = "Hmm bener lo pada ga bosen atau cuma jadi detektif doang?";
     } else if (jumlahKunjungan === 100) {
         pesanKunjungan = "Dia ga meninggal, jiwanya yang meninggal. Kuburan dan kado itu hanyalah imajinasi untuk memperkuat kesan cerita.";
-    } else if (jumlahKunjungan >= 1000) { // Atau === 1000 jika ingin spesifik hanya di kunjungan ke-1000
+    } else if (jumlahKunjungan >= 1000) { 
         pesanKunjungan = "Dia itu adalah ffffffffff";
     }
-    // Anda bisa tambahkan else if untuk rentang, misalnya jika jumlahKunjungan > 1000 && jumlahKunjungan < 1010
-    // untuk pesan yang berbeda lagi.
-
 
     if (pesanKunjungan) {
-        // Kita akan menggunakan fungsi yang sama seperti pesan kalkulator
-        // atau membuat fungsi baru khusus untuk ini. Mari gunakan displayTemporaryText jika ada.
-        // Pesan ini akan muncul setelah elemen utama (intro atau main content) ditampilkan.
-        // Jadi kita perlu sedikit penundaan agar tidak muncul terlalu cepat atau sebelum DOM siap.
-        
-        // Pastikan ini dijalankan setelah intro atau main content siap
         const tampilkanPesanSetelahKontenSiap = () => {
-            // Cek apakah intro atau main content sudah tampil
             const introTampil = Cache.introSection && getComputedStyle(Cache.introSection).display !== 'none' && getComputedStyle(Cache.introSection).opacity === '1';
             const mainTampil = Cache.mainContent && getComputedStyle(Cache.mainContent).display !== 'none' && getComputedStyle(Cache.mainContent).opacity === '1';
 
             if (introTampil || mainTampil) {
-                // Tampilkan pesan hanya jika BELUM ditampilkan di sesi/kunjungan ini
-                // Bendera `sudahTampilkanPesanKunjunganIni` membantu ini,
-                // namun kita reset di `beforeunload`
-                // Logika untuk `KUNCI_PESAN_KUNJUNGAN_DITAMPILKAN` di atas sudah menangani
-                // agar pesan tidak muncul berulang kali pada reload halaman yang sama.
 
                 if (typeof UIManager !== 'undefined' && UIManager.displayTemporaryText) {
-                    setTimeout(() => { // Penundaan sedikit agar tidak terlalu mendadak
+                    setTimeout(() => { 
                         UIManager.displayTemporaryText(pesanKunjungan);
-                        // Setelah pesan ditampilkan, tandai agar tidak tampil lagi jika reload
-                        // (sudah dilakukan di atas dengan KUNCI_PESAN_KUNJUNGAN_DITAMPILKAN)
-                    }, 1500); // Tunda 1.5 detik setelah konten siap
+                    }, 1500); 
                 } else {
-                    // Fallback jika UIManager.displayTemporaryText tidak ada
                     setTimeout(() => {
                         alert(pesanKunjungan);
                     }, 1500);
                 }
             } else {
-                // Jika konten belum siap, coba lagi nanti
                 setTimeout(tampilkanPesanSetelahKontenSiap, 500);
             }
         };
         
-        // Mulai mencoba menampilkan pesan setelah delay awal
-        setTimeout(tampilkanPesanSetelahKontenSiap, 500); // Penundaan awal
+        setTimeout(tampilkanPesanSetelahKontenSiap, 500); 
     }
 
     console.log("Memulai init() halaman...");
@@ -4815,7 +4434,7 @@ localStorage.removeItem('jumlahKesalahanGameMemori');
         if (gameTelahDimenangkanSebelumnya && waktuMenangDisimpan) {
             const waktuMenangMs = parseInt(waktuMenangDisimpan, 10);
             const selisihWaktuMs = Date.now() - waktuMenangMs;
-            const satuJamMs = SATU_JAM_DALAM_MILIDETIK; // Pastikan SATU_JAM_DALAM_MILIDETIK terdefinisi global (3600000)
+            const satuJamMs = SATU_JAM_DALAM_MILIDETIK; 
 
             console.log("waktuMenangMs:", waktuMenangMs);
             console.log("Date.now():", Date.now());
@@ -4827,7 +4446,7 @@ localStorage.removeItem('jumlahKesalahanGameMemori');
                 console.log("Game memori: Lebih dari 1 jam telah berlalu. Status kemenangan direset.");
                 localStorage.removeItem('gameMemoriDimenangkan');
                 localStorage.removeItem('waktuMenangGameMemori');
-                gameTelahDimenangkanSebelumnya = false; // Update status untuk digunakan dalam logika di bawah
+                gameTelahDimenangkanSebelumnya = false; 
                 console.log("localStorage gameMemoriDimenangkan SETELAH reset:", localStorage.getItem('gameMemoriDimenangkan'));
             } else {
                 console.log("Game memori: Belum 1 jam sejak kemenangan terakhir.");
@@ -4835,38 +4454,27 @@ localStorage.removeItem('jumlahKesalahanGameMemori');
         } else {
             console.log("Tidak ada status 'gameTelahDimenangkanSebelumnya' atau 'waktuMenangDisimpan' di localStorage.");
         }
-        // SELESAI KODE DEBUGGING YANG DIMASUKKAN untuk reset
-
-        // ... (LOGIKA PENGHITUNG JUMLAH KUNJUNGAN ANDA BIARKAN SEPERTI SEMULA) ...
-        // const KUNCI_JUMLAH_KUNJUNGAN = 'adzanSitusJumlahKunjungan';
-        // ... (dst, sampai sebelum "LOGIKA AWAL TAMPILAN")
-
-
-        // LOGIKA AWAL TAMPILAN (setelah game dimenangkan atau pertama kali)
+        
         const gameDimenangkan = localStorage.getItem('gameMemoriDimenangkan') === 'true';
         const sedangDalamLockout = localStorage.getItem('waktuAkhirKunciGameMemori') && Date.now() < parseInt(localStorage.getItem('waktuAkhirKunciGameMemori'));
 
         if (sedangDalamLockout) {
-            console.log("Masuk blok: sedangDalamLockout"); // LOG
-            if (Cache.lapisanGameMemori) Cache.lapisanGameMemori.style.display = 'none'; // Sembunyikan game overlay standar
+            console.log("Masuk blok: sedangDalamLockout"); 
+            if (Cache.lapisanGameMemori) Cache.lapisanGameMemori.style.display = 'none'; 
             if (typeof GameMemori !== 'undefined') GameMemori.tampilkanLayarKunci(parseInt(localStorage.getItem('waktuAkhirKunciGameMemori')));
-            if (Cache.darkModeToggleButton) Cache.darkModeToggleButton.style.display = 'flex'; // Tombol mode tetap ada
-             if (Cache.introSection) Cache.introSection.style.display = 'none'; // Sembunyikan intro
-             if (Cache.mainContent) Cache.mainContent.style.display = 'none'; // Sembunyikan main content juga
-             if (typeof UIManager !== 'undefined') UIManager.setWidgetVisibility(false); // Sembunyikan widget
+            if (Cache.darkModeToggleButton) Cache.darkModeToggleButton.style.display = 'flex'; 
+             if (Cache.introSection) Cache.introSection.style.display = 'none'; 
+             if (Cache.mainContent) Cache.mainContent.style.display = 'none'; 
+             if (typeof UIManager !== 'undefined') UIManager.setWidgetVisibility(false); 
 
         } else if (gameDimenangkan) {
-            console.log("Masuk blok: gameDimenangkan (skip ke cerita)"); // LOG
-            // Jika game sudah dimenangkan, langsung ke cerita.
-            // Ini akan ditangani oleh pemanggilan GameMemori.lanjutkanKeCerita() di dalam GameMemori.init()
-            // atau bisa dipanggil langsung di sini jika intro memang sudah seharusnya tidak ada
-            if (Cache.introSection) Cache.introSection.style.display = 'none'; // Langsung sembunyikan intro jika sudah menang
+            console.log("Masuk blok: gameDimenangkan (skip ke cerita)"); 
+            if (Cache.introSection) Cache.introSection.style.display = 'none'; 
 
             if (typeof GameMemori !== 'undefined' && GameMemori.lanjutkanKeCerita) {
-                 GameMemori.lanjutkanKeCerita(true); // true untuk memaksa lanjut tanpa pengecekan game aktif
+                 GameMemori.lanjutkanKeCerita(true); 
             } else {
-                console.log("Masuk blok: else (tampilkan intro/game)"); // LOG
-                 // Fallback manual jika GameMemori belum sepenuhnya siap saat ini
+                console.log("Masuk blok: else (tampilkan intro/game)"); 
                 if (Cache.darkModeToggleButton) Cache.darkModeToggleButton.style.display = 'flex';
                 if (typeof UIManager !== 'undefined') UIManager.setWidgetVisibility(true);
                 if (Cache.mainContent) { Cache.mainContent.style.display = 'block'; Cache.mainContent.classList.add('is-entering'); }
@@ -4877,17 +4485,12 @@ localStorage.removeItem('jumlahKesalahanGameMemori');
                     SadEffectManager.initEffect();
                 }
             }, 100);
-             // >>> AKHIR TAMBAHAN <<<
         
             }
              if (Cache.lapisanGameMemori) Cache.lapisanGameMemori.style.display = 'none';
 
         } else {
-            // Kondisi default: game belum dimenangkan dan tidak terkunci.
-            // Intro akan tampil, game akan tersembunyi.
-            // Saat tombol #start-story diklik, GameMemori.init() akan dipanggil.
             if (Cache.introSection) {
-                // Memastikan intro tampil jika belum
                 Cache.introSection.style.display = 'flex';
                 Cache.introSection.style.opacity = '1';
                 Cache.introSection.classList.remove('is-exiting');
@@ -4940,7 +4543,7 @@ localStorage.removeItem('jumlahKesalahanGameMemori');
 <div id="game-memori-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); z-index: 50000; display: flex; justify-content: center; align-items: center; font-family: 'Cal Sans', sans-serif; backdrop-filter: blur(5px);">
   <div id="game-memori-container" style="background-color: var(--bg-main-light); color: var(--text-color-light); padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.3); max-width: 90%; width: 500px;">
       <h2 id="judul-game-memori" style="color: var(--heading-color-light); margin-bottom: 15px; font-size: 2rem;">Ga semudah itu ferguso</h2>
-      <p id="instruksi-game-memori" style="margin-bottom: 20px; font-size: 1rem; line-height: 1.4;">Banyak anomali yang suka skrinsut abis itu sebar entah kemana-mana, jadi buat keamanan, gue buatin memory puzzle yang cuma bisa dilewatin orang-orang SDM tinggi. Nantinya kalau ada kabar pelakunya kelacak sama salah satu dari kalian, kemungkinan besar kalian bisa direkrut sama elit global (weladalah :v). Good luck, cuma 16 kesempatan dalam 1 hari.</p>
+      <p id="instruksi-game-memori" style="margin-bottom: 20px; font-size: 1rem; line-height: 1.4;">anyak anomali yang suka skrinsut abis itu sebar entah kemana-mana, jadi buat keamanan, gue buatin memory puzzle yang cuma bisa dilewatin orang-orang SDM tinggi. Nantinya kalau ada kabar pelakunya kelacak sama salah satu dari kalian, kemungkinan besar kalian bisa direkrut sama elit global (weladalah :v). Good luck, cuma 16 kesempatan dalam 1 hari.</p>
       
       <div id="layar-kunci-game-memori" style="display: none;">
           <h3 style="color: red; margin-bottom: 10px;">Lo gagal goblok!</h3>
@@ -4966,3 +4569,4 @@ localStorage.removeItem('jumlahKesalahanGameMemori');
 
 </body>
 </html>
+```
